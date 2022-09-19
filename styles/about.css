@@ -190,7 +190,6 @@ main {
   white-space: nowrap;
   overflow: hidden;
   background-color: var(--block-border-inactive_color);
-  scale: 1;
   transform: scale(1);
   transition: transform 0.2s, opacity 0.15s;
 }
