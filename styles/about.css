@@ -50,7 +50,6 @@ header {
   top: 0;
   width: 100%;
   height: 80px;
-  background: var(--main-font-family);
   background-color: var(--main-transparent-bg-color);
   backdrop-filter: blur(4px);
   z-index: 100;
