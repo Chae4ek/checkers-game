@@ -7,18 +7,18 @@ table.chessboard {
   display: inline-block;
   margin: 25px auto 0 auto;
   border-collapse: collapse;
-  border-radius: 20px;
+  border-radius: 2.083vmin;
   overflow: hidden;
 }
 
 table.chessboard td {
-  width: 100px;
-  height: 100px;
+  width: 10vmin;
+  height: 10vmin;
   vertical-align: top;
   font-family: var(--main-font-family);
   font-style: normal;
   font-weight: 600;
-  font-size: 24px;
+  font-size: 2.5vmin;
 }
 
 table.chessboard tr:nth-last-child(1) td {
@@ -42,29 +42,31 @@ table.chessboard tr:nth-child(even) td:nth-child(odd) {
 
 .chessboard-black_pawn {
   background: url(../images/black_pawn.svg) center no-repeat;
+  background-size: 7vmin;
 }
 
 .chessboard-white_pawn {
   background: url(../images/white_pawn.svg) center no-repeat;
+  background-size: 7vmin;
 }
 
 .chessboard_text-align-left_top {
   display: block;
-  margin-left: 5px;
+  margin-left: 0.52vmin;
   text-align: left;
-  height: 29px;
-  line-height: 29px;
+  height: 3.02vmin;
+  line-height: 3.02vmin;
 }
 
 .chessboard_text-a1_field-align {
-  margin-top: calc(100% - 29px - 29px - 2px);
+  margin-top: calc(100% - 3.02vmin - 3.02vmin - 0.2vmin);
 }
 
 .chessboard_text-align-right_bottom {
   display: block;
-  margin-right: 5px;
-  margin-bottom: 2px;
+  margin-right: 0.52vmin;
+  margin-bottom: 0.2vmin;
   text-align: right;
-  height: 29px;
-  line-height: 29px;
+  height: 3.02vmin;
+  line-height: 3.02vmin;
 }
