@@ -1,0 +1,27 @@
+.main-left {
+  display: inline-block;
+  min-width: 260px;
+  width: 26%;
+  max-width: 700px;
+  text-align: left;
+  margin-right: 50px;
+}
+
+.main-center {
+  display: inline-block;
+  min-width: 260px;
+  width: 26%;
+  max-width: 700px;
+  vertical-align: top;
+  text-align: left;
+  margin-right: 50px;
+}
+
+.main-right {
+  display: inline-block;
+  min-width: 260px;
+  width: 26%;
+  max-width: 700px;
+  vertical-align: top;
+  text-align: left;
+}
