@@ -1,0 +1,109 @@
+:root {
+  --chessboard-field-black_color: #9faf88;
+  --chessboard-field-white_color: #eeeed5;
+  --move_history-color: #614e7d;
+  --move_history-active_color: #c69de7;
+  --move_history-bg_color: #202022;
+}
+
+table.chessboard {
+  display: inline-block;
+  margin: 25px auto 0 auto;
+  border-collapse: collapse;
+  border-radius: 2.083vmin;
+  overflow: hidden;
+}
+
+table.chessboard td {
+  width: 10vmin;
+  height: 10vmin;
+  vertical-align: top;
+  font-family: var(--main-font-family);
+  font-style: normal;
+  font-weight: 600;
+  font-size: 2.5vmin;
+}
+
+table.chessboard tr:nth-last-child(1) td {
+  vertical-align: bottom;
+}
+
+table.chessboard tr td {
+  background-color: var(--chessboard-field-white_color);
+  color: var(--chessboard-field-black_color);
+}
+
+table.chessboard tr:nth-child(odd) td:nth-child(even) {
+  background-color: var(--chessboard-field-black_color);
+  color: var(--chessboard-field-white_color);
+}
+
+table.chessboard tr:nth-child(even) td:nth-child(odd) {
+  background-color: var(--chessboard-field-black_color);
+  color: var(--chessboard-field-white_color);
+}
+
+.chessboard-black_pawn {
+  background: url(../images/black_pawn.svg) center no-repeat;
+  background-size: 7vmin;
+}
+
+.chessboard-white_pawn {
+  background: url(../images/white_pawn.svg) center no-repeat;
+  background-size: 7vmin;
+}
+
+.chessboard_text-align-left_top {
+  display: block;
+  margin-left: 0.52vmin;
+  text-align: left;
+  height: 3.02vmin;
+  line-height: 3.02vmin;
+}
+
+.chessboard_text-a1_field-align {
+  margin-top: calc(100% - 3.02vmin - 3.02vmin - 0.2vmin);
+}
+
+.chessboard_text-align-right_bottom {
+  display: block;
+  margin-right: 0.52vmin;
+  margin-bottom: 0.2vmin;
+  text-align: right;
+  height: 3.02vmin;
+  line-height: 3.02vmin;
+}
+
+.move_history {
+  display: inline-block;
+  vertical-align: top;
+  width: 35%;
+  max-width: 500px;
+  height: 25vmin;
+  margin: 25px 0 0 25px;
+  border: 2px solid var(--block-border-inactive_color);
+  border-radius: 2.083vmin;
+  color: var(--move_history-color);
+  background-color: var(--move_history-bg_color);
+}
+
+@media screen and (max-width: 1080px) {
+  .move_history {
+    width: 80vmin;
+    max-width: 80vmin;
+    margin-left: 0;
+  }
+}
+
+.move_history-text {
+  font-family: var(--main-font-family);
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  text-align: left;
+  margin: 16px;
+}
+
+.text-color-active {
+  color: var(--move_history-active_color);
+}
