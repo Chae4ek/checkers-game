@@ -2,13 +2,19 @@
   --chessboard-field-black_color: #9faf88;
   --chessboard-field-white_color: #eeeed5;
   --move_history-bg_color: #202022;
+  --chessboard-board-radius: 2.083vmin;
+  --button-border-color: #847141;
+  --button-text-color: #d7b55b;
+  --button-border-selected_color: #a98e4a;
+  --button-background-selected_color: #332e21;
+  --button-border-active_color: #4e442b;
 }
 
 table.chessboard {
   display: inline-block;
   margin: 25px auto 0 auto;
   border-collapse: collapse;
-  border-radius: 2.083vmin;
+  border-radius: var(--chessboard-board-radius);
   overflow: hidden;
 }
 
@@ -51,6 +57,24 @@ table.chessboard tr:nth-child(even) td:nth-child(odd) {
   background-size: 7vmin;
 }
 
+.chessboard-black_queen {
+  background: url(../images/black_queen.svg) center no-repeat;
+  background-size: 7vmin;
+}
+
+.chessboard-white_queen {
+  background: url(../images/white_queen.svg) center no-repeat;
+  background-size: 7vmin;
+}
+
+.chessboard-black_pawn:hover,
+.chessboard-white_pawn:hover,
+.chessboard-black_queen:hover,
+.chessboard-white_queen:hover {
+  cursor: pointer;
+  background-size: 7.4vmin;
+}
+
 .chessboard_text-align-left_top {
   display: block;
   margin-left: 0.52vmin;
@@ -72,28 +96,23 @@ table.chessboard tr:nth-child(even) td:nth-child(odd) {
   line-height: 3.02vmin;
 }
 
-.move_history {
-  display: inline-block;
+.chessboard-interface {
+  display: inline-flex;
+  flex-flow: column;
   vertical-align: top;
-  width: 35%;
-  max-width: 500px;
-  height: 25vmin;
+  width: calc(100% - 80vmin - 25px);
+  height: 80vmin;
+  max-width: 80vmin;
   margin: 25px 0 0 25px;
+}
+
+.move_history {
+  height: 250px;
   border: 2px solid var(--block-border-inactive_color);
-  border-radius: 2.083vmin;
+  border-radius: var(--chessboard-board-radius);
   color: var(--block-description-inactive_color);
   background-color: var(--move_history-bg_color);
   transition: color 0.2s, border-color 0.2s;
-}
-
-@media screen and (max-width: 1080px) {
-  .move_history {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 80vmin;
-    max-width: unset;
-  }
 }
 
 .move_history:hover {
@@ -112,4 +131,107 @@ table.chessboard tr:nth-child(even) td:nth-child(odd) {
 
 .text-color-active {
   color: var(--block-description-active_color);
+}
+
+.interface-row {
+  display: inline-block;
+  width: 100%;
+  height: fit-content;
+  text-align: left;
+}
+
+.interface-bottom {
+  margin-top: auto;
+}
+
+@media screen and (max-width: 1080px) {
+  .chessboard-interface {
+    flex-flow: wrap;
+    align-content: flex-start;
+    margin: 0 auto 0 auto;
+    width: 80vmin;
+    max-width: unset;
+  }
+  .move_history {
+    margin-top: 25px;
+    width: 100%;
+    order: 1;
+  }
+  .interface-row {
+    width: fit-content;
+  }
+  .interface-bottom {
+    margin-top: 0;
+    margin-left: auto;
+  }
+}
+
+button {
+  cursor: pointer;
+  display: inline-block;
+  margin-top: 25px;
+  text-align: center;
+  width: fit-content;
+  padding: 0 20px;
+  height: 66px;
+  font-family: var(--main-font-family);
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  border: 3px solid var(--button-border-color);
+  border-radius: var(--chessboard-board-radius);
+  color: var(--button-text-color);
+  background-color: var(--move_history-bg_color);
+  transition: color 0.05s, border-color 0.05s, background-color 0.05s;
+}
+
+button:hover {
+  border-color: var(--button-border-selected_color);
+  background-color: var(--button-background-selected_color);
+}
+
+button:disabled {
+  cursor: default;
+}
+
+button:disabled,
+button:active {
+  color: var(--button-border-active_color);
+  border-color: var(--button-border-active_color);
+  background-color: var(--move_history-bg_color);
+}
+
+.button-example,
+.button-start {
+  min-width: 140px;
+  width: inherit;
+  max-width: 186px;
+}
+
+.button-example,
+.button-cancel {
+  margin-right: 25px;
+}
+
+.button-cancel {
+  width: 66px;
+  height: 66px;
+  padding: 0;
+  text-align: left;
+  vertical-align: top;
+  display: inline-flex;
+}
+
+.button-cancel::before {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  content: "";
+  background: url(../images/cancel.svg) center no-repeat;
+  filter: invert(74%) sepia(80%) saturate(288%) hue-rotate(356deg) brightness(86%) contrast(95%);
+}
+
+.button-cancel:disabled::before,
+.button-cancel:active::before {
+  filter: invert(22%) sepia(26%) saturate(686%) hue-rotate(5deg) brightness(98%) contrast(86%);
 }
