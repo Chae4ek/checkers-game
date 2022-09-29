@@ -7,7 +7,7 @@
   --button-text-color: #d7b55b;
   --button-border-selected_color: #a98e4a;
   --button-background-selected_color: #332e21;
-  --button-border-active_color: #4e442b;
+  --button-border-active_color: #d7b55b40;
 }
 
 table.chessboard {
@@ -201,19 +201,19 @@ button:active {
   background-color: var(--move_history-bg_color);
 }
 
-.button-example,
-.button-start {
+#button-example,
+#button-start {
   min-width: 140px;
   width: inherit;
   max-width: 186px;
 }
 
-.button-example,
-.button-cancel {
+#button-example,
+#button-cancel {
   margin-right: 25px;
 }
 
-.button-cancel {
+#button-cancel {
   width: 66px;
   height: 66px;
   padding: 0;
@@ -222,16 +222,15 @@ button:active {
   display: inline-flex;
 }
 
-.button-cancel::before {
-  position: absolute;
-  width: 60px;
-  height: 60px;
-  content: "";
-  background: url(../images/cancel.svg) center no-repeat;
-  filter: invert(74%) sepia(80%) saturate(288%) hue-rotate(356deg) brightness(86%) contrast(95%);
+#button-cancel::before {
+  content: url(../images/cancel.svg);
+  display: inline-flex;
+  align-self: center;
+  margin: 0 auto;
+  transition: opacity 0.05s;
 }
 
-.button-cancel:disabled::before,
-.button-cancel:active::before {
-  filter: invert(22%) sepia(26%) saturate(686%) hue-rotate(5deg) brightness(98%) contrast(86%);
+#button-cancel:disabled::before,
+#button-cancel:active::before {
+  opacity: 25%;
 }
