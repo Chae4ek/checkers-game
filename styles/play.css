@@ -1,8 +1,6 @@
 :root {
   --chessboard-field-black_color: #9faf88;
   --chessboard-field-white_color: #eeeed5;
-  --move_history-color: #614e7d;
-  --move_history-active_color: #c69de7;
   --move_history-bg_color: #202022;
 }
 
@@ -83,16 +81,24 @@ table.chessboard tr:nth-child(even) td:nth-child(odd) {
   margin: 25px 0 0 25px;
   border: 2px solid var(--block-border-inactive_color);
   border-radius: 2.083vmin;
-  color: var(--move_history-color);
+  color: var(--block-description-inactive_color);
   background-color: var(--move_history-bg_color);
+  transition: color 0.2s, border-color 0.2s;
 }
 
 @media screen and (max-width: 1080px) {
   .move_history {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
     width: 80vmin;
-    max-width: 80vmin;
-    margin-left: 0;
+    max-width: unset;
   }
+}
+
+.move_history:hover {
+  color: var(--block-description-selected_color);
+  border-color: var(--block-border-selected_color);
 }
 
 .move_history-text {
@@ -105,5 +111,5 @@ table.chessboard tr:nth-child(even) td:nth-child(odd) {
 }
 
 .text-color-active {
-  color: var(--move_history-active_color);
+  color: var(--block-description-active_color);
 }

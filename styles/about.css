@@ -165,7 +165,7 @@ main {
 
 .module-block:hover {
   color: var(--block-description-selected_color);
-  border: 2px solid var(--block-border-selected_color);
+  border-color: var(--block-border-selected_color);
 }
 
 .module-active_block:hover .module-block-image,
