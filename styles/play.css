@@ -48,23 +48,27 @@ table.chessboard tr:nth-child(even) td:nth-child(odd) {
 }
 
 .chessboard-black_pawn {
-  background: url(../images/black_pawn.svg) center no-repeat;
-  background-size: 7vmin;
+  background: url(../images/black_pawn.png) center no-repeat;
+  background-size: 8vmin;
+  transition: background-size 0.1s;
 }
 
 .chessboard-white_pawn {
-  background: url(../images/white_pawn.svg) center no-repeat;
-  background-size: 7vmin;
+  background: url(../images/white_pawn.png) center no-repeat;
+  background-size: 8vmin;
+  transition: background-size 0.1s;
 }
 
 .chessboard-black_queen {
-  background: url(../images/black_queen.svg) center no-repeat;
-  background-size: 7vmin;
+  background: url(../images/black_queen.png) center no-repeat;
+  background-size: 8vmin;
+  transition: background-size 0.1s;
 }
 
 .chessboard-white_queen {
-  background: url(../images/white_queen.svg) center no-repeat;
-  background-size: 7vmin;
+  background: url(../images/white_queen.png) center no-repeat;
+  background-size: 8vmin;
+  transition: background-size 0.1s;
 }
 
 .chessboard-black_pawn:hover,
@@ -72,7 +76,7 @@ table.chessboard tr:nth-child(even) td:nth-child(odd) {
 .chessboard-black_queen:hover,
 .chessboard-white_queen:hover {
   cursor: pointer;
-  background-size: 7.4vmin;
+  background-size: 8.4vmin;
 }
 
 .chessboard_text-align-left_top {
