@@ -1,4 +1,5 @@
-let chessboardModel = new ChessboardModel()
+let rules = new Rules(false, true)
+let chessboardModel = new ChessboardModel(rules)
 let chessboardView = new ChessboardView()
 let chessboardController = new ChessboardController(chessboardModel, chessboardView)
 

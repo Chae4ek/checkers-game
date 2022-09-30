@@ -1,6 +1,12 @@
 :root {
   --chessboard-field-black_color: #9faf88;
   --chessboard-field-white_color: #eeeed5;
+  --chessboard-field-selected_black_color: #e5d757;
+  --chessboard-field-selected_white_color: #fff387;
+  --chessboard-field-silent_move_black_color: #8cd775;
+  --chessboard-field-silent_move_white_color: #afff98;
+  --chessboard-field-attack_move_black_color: #df5851;
+  --chessboard-field-attack_move_white_color: #ff7b74;
   --move_history-bg_color: #202022;
   --chessboard-board-radius: 2.083vmin;
   --button-border-color: #847141;
@@ -47,6 +53,51 @@ table.chessboard tr:nth-child(even) td:nth-child(odd) {
   color: var(--chessboard-field-white_color);
 }
 
+table.chessboard tr td.chessboard-field-selected {
+  background-color: var(--chessboard-field-selected_white_color);
+  color: var(--chessboard-field-selected_black_color);
+}
+
+table.chessboard tr:nth-child(odd) td:nth-child(even).chessboard-field-selected {
+  background-color: var(--chessboard-field-selected_black_color);
+  color: var(--chessboard-field-selected_white_color);
+}
+
+table.chessboard tr:nth-child(even) td:nth-child(odd).chessboard-field-selected {
+  background-color: var(--chessboard-field-selected_black_color);
+  color: var(--chessboard-field-selected_white_color);
+}
+
+table.chessboard tr td.chessboard-field-silent_move {
+  background-color: var(--chessboard-field-silent_move_white_color);
+  color: var(--chessboard-field-silent_move_black_color);
+}
+
+table.chessboard tr:nth-child(odd) td:nth-child(even).chessboard-field-silent_move {
+  background-color: var(--chessboard-field-silent_move_black_color);
+  color: var(--chessboard-field-silent_move_white_color);
+}
+
+table.chessboard tr:nth-child(even) td:nth-child(odd).chessboard-field-silent_move {
+  background-color: var(--chessboard-field-silent_move_black_color);
+  color: var(--chessboard-field-silent_move_white_color);
+}
+
+table.chessboard tr td.chessboard-field-attack_move {
+  background-color: var(--chessboard-field-attack_move_white_color);
+  color: var(--chessboard-field-attack_move_black_color);
+}
+
+table.chessboard tr:nth-child(odd) td:nth-child(even).chessboard-field-attack_move {
+  background-color: var(--chessboard-field-attack_move_black_color);
+  color: var(--chessboard-field-attack_move_white_color);
+}
+
+table.chessboard tr:nth-child(even) td:nth-child(odd).chessboard-field-attack_move {
+  background-color: var(--chessboard-field-attack_move_black_color);
+  color: var(--chessboard-field-attack_move_white_color);
+}
+
 .chessboard-black_pawn {
   background: url(../images/black_pawn.png) center no-repeat;
   background-size: 8vmin;
@@ -71,10 +122,7 @@ table.chessboard tr:nth-child(even) td:nth-child(odd) {
   transition: background-size 0.1s;
 }
 
-.chessboard-black_pawn:hover,
-.chessboard-white_pawn:hover,
-.chessboard-black_queen:hover,
-.chessboard-white_queen:hover {
+.chessboard-selectable_field:hover {
   cursor: pointer;
   background-size: 8.4vmin;
 }
