@@ -3,8 +3,13 @@ let chessboardModel = new ChessboardModel(rules)
 let chessboardView = new ChessboardView()
 let chessboardController = new ChessboardController(chessboardModel, chessboardView)
 
+document.getElementById('button-copy').onclick = () => clickOnCopyButton(chessboardController)
 document.getElementById('button-example').onclick = () => clickOnExampleButton(chessboardController)
 document.getElementById('button-start').onclick = () => clickOnStartButton(chessboardController)
+
+function clickOnCopyButton(chessboardController) {
+  chessboardController.copyMoveHistoryToClipboard()
+}
 
 function clickOnExampleButton(chessboardController) {
   chessboardController.setChessboard(

@@ -80,4 +80,9 @@ class ChessboardController {
       }
     }
   }
+
+  copyMoveHistoryToClipboard() {
+    const moveHistory = this.chessboardModel.getMoveHistory().convertToString()
+    navigator.clipboard.writeText(moveHistory)
+  }
 }

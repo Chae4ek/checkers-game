@@ -14,6 +14,8 @@
   --button-border-selected_color: #a98e4a;
   --button-background-selected_color: #332e21;
   --button-border-active_color: #d7b55b40;
+  --copy_button-border-active_color: #af86d040;
+  --copy_button-background-selected_color: #2d253a;
 }
 
 table.chessboard {
@@ -159,6 +161,8 @@ table.chessboard tr:nth-child(even) td:nth-child(odd).chessboard-field-attack_mo
 }
 
 .move_history {
+  display: inline-flex;
+  flex-flow: column;
   height: 250px;
   border: 2px solid var(--block-border-inactive_color);
   border-radius: var(--chessboard-board-radius);
@@ -183,6 +187,41 @@ table.chessboard tr:nth-child(even) td:nth-child(odd).chessboard-field-attack_mo
 
 .text-color-active {
   color: var(--block-description-active_color);
+}
+
+#button-copy {
+  align-self: flex-end;
+  margin: auto 16px 16px 16px;
+}
+
+#button-copy {
+  width: 60px;
+  height: 60px;
+  padding: 0;
+  text-align: left;
+  vertical-align: top;
+  display: inline-flex;
+  border-width: 2px;
+  border-color: var(--block-border-selected_color);
+}
+
+#button-copy:hover {
+  border-color: var(--block-border-active_color);
+  background-color: var(--copy_button-background-selected_color);
+}
+
+#button-copy:disabled,
+#button-copy:active {
+  border-color: var(--copy_button-border-active_color);
+  background-color: var(--move_history-bg_color);
+}
+
+#button-copy::before {
+  content: url(../images/copy.svg);
+  display: inline-flex;
+  align-self: center;
+  margin: 0 auto;
+  transition: opacity 0.05s;
 }
 
 .interface-row {
@@ -282,6 +321,8 @@ button:active {
   transition: opacity 0.05s;
 }
 
+#button-copy:disabled::before,
+#button-copy:active::before,
 #button-cancel:disabled::before,
 #button-cancel:active::before {
   opacity: 25%;

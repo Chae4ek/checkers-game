@@ -23,6 +23,14 @@ class ChessboardModel {
   }
 
   /**
+   * @returns {MoveHistory}
+   */
+  getMoveHistory() {
+    // TODO
+    return new MoveHistory()
+  }
+
+  /**
    * '-' == empty field
    * 'p' == black pawn
    * 'P' == white pawn
@@ -207,5 +215,16 @@ class Queen extends Piece {
       column += columnVector
       move = this.field.chessboardModel.getField(row, column)
     }
+  }
+}
+
+class MoveHistory {
+
+  /**
+   * @returns {string}
+   */
+  convertToString() {
+    // TODO
+    return "TODO: return move history string"
   }
 }
