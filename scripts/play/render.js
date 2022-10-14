@@ -15,6 +15,16 @@ class ChessboardView {
     }
   }
 
+  toggleMoveButtons(enable) {
+    if (enable) {
+      document.getElementById('button-cancel').removeAttribute('disabled')
+      document.getElementById('button-end').removeAttribute('disabled')
+    } else {
+      document.getElementById('button-cancel').setAttribute('disabled', true)
+      document.getElementById('button-end').setAttribute('disabled', true)
+    }
+  }
+
   /**
    * @param {number} row 
    * @param {number} column 
@@ -51,31 +61,27 @@ class ChessboardView {
 
   setEmptyField(row, column) {
     const classList = this.cells[row][column].classList
-    while (classList.length > 1) classList.remove(classList.item(1))
+    classList.remove('chessboard-white_pawn', 'chessboard-black_pawn', 'chessboard-white_queen', 'chessboard-black_queen')
   }
 
-  setWhitePawn(row, column, isSelectable) {
+  setWhitePawn(row, column) {
     this.setEmptyField(row, column)
     this.cells[row][column].classList.add('chessboard-white_pawn')
-    this.setSelectableField(row, column, isSelectable)
   }
 
-  setBlackPawn(row, column, isSelectable) {
+  setBlackPawn(row, column) {
     this.setEmptyField(row, column)
     this.cells[row][column].classList.add('chessboard-black_pawn')
-    this.setSelectableField(row, column, isSelectable)
   }
 
-  setWhiteQueen(row, column, isSelectable) {
+  setWhiteQueen(row, column) {
     this.setEmptyField(row, column)
     this.cells[row][column].classList.add('chessboard-white_queen')
-    this.setSelectableField(row, column, isSelectable)
   }
 
-  setBlackQueen(row, column, isSelectable) {
+  setBlackQueen(row, column) {
     this.setEmptyField(row, column)
     this.cells[row][column].classList.add('chessboard-black_queen')
-    this.setSelectableField(row, column, isSelectable)
   }
 }
 

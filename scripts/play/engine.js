@@ -1,8 +1,10 @@
 class Rules {
 
-  constructor(canAttackMoveBackward, isAttackMandatory) {
+  constructor(canAttackMoveBackward, isAttackMandatory, firstPlayerIsWhite, canAttackChainMove) {
     this.canAttackMoveBackward = canAttackMoveBackward
     this.isAttackMandatory = isAttackMandatory
+    this.firstPlayerIsWhite = firstPlayerIsWhite
+    this.canAttackChainMove = canAttackChainMove
   }
 }
 
@@ -20,14 +22,57 @@ class ChessboardModel {
         this.board[row].push(new Field(row, column, this))
       }
     }
+    this.moveHistory = new MoveHistory()
+    if (this.rules.firstPlayerIsWhite) this.firstPlayerColor = PieceColor.WHITE
+    else this.firstPlayerColor = PieceColor.BLACK
+    this.currentPlayerColor = this.firstPlayerColor
   }
 
   /**
-   * @returns {MoveHistory}
+   * @param {Field} fromField
+   * @param {Field} toField
+   * @returns {Move?} move that was made or null if move is incorrect
    */
-  getMoveHistory() {
+  tryMove(fromField, toField) {
+    const move = this.#createMove(fromField, toField)
+    if (move != null) return this.#makeMove(move)
+    return null
+  }
+
+  undoMove() {
     // TODO
-    return new MoveHistory()
+  }
+
+  /**
+   * @returns {Move?} a move or null if the move is incorrect
+   */
+  #createMove(fromField, toField) {
+    const createdMove = new Move(fromField, toField)
+    for (const [type, moves] of this.getPossibleMoves(fromField.row, fromField.column)) {
+      for (const move of moves) {
+        if (move.toField == toField) {
+          createdMove.attackedPiece = move.attackedPiece
+          return createdMove
+        }
+      }
+    }
+    return null
+  }
+
+  #makeMove(move) {
+    let piece = move.fromField.piece
+    piece.field = move.toField
+    if (piece instanceof Pawn) {
+      if (piece.color == PieceColor.WHITE && move.toField.row == 0) piece = new Queen(move.toField, piece.color)
+      if (piece.color == PieceColor.BLACK && move.toField.row == this.board[0].length - 1) piece = new Queen(move.toField, piece.color)
+    }
+    move.toField.piece = piece
+
+    move.fromField.piece = null
+    if (move.attackedPiece != null) move.attackedPiece.field.piece = null
+
+    this.moveHistory.moves.push(move)
+    return move
   }
 
   /**
@@ -70,7 +115,7 @@ class ChessboardModel {
   }
 
   /**
-   * @returns {Map<MoveType, Field[]>} allowed fields to move from specified position
+   * @returns {Map<MoveType, Move[]>} allowed fields to move from specified position
    */
   getPossibleMoves(row, column) {
     const moves = this.#getPossibleMovesWithoutRules(row, column)
@@ -95,6 +140,9 @@ class ChessboardModel {
     return this.board[row][column].piece == null ? new Map() : this.board[row][column].piece.getPossibleMoves()
   }
 
+  /**
+   * @returns {Field?} field if its coords are correct
+   */
   getField(row, column) {
     if (row >= 0 && row < this.board.length && column >= 0 && column < this.board[0].length) return this.board[row][column]
     return null
@@ -171,15 +219,22 @@ class Pawn extends Piece {
   }
 
   #tryAddSilentMove(rowVector, columnVector, allowedMoves) {
-    const move = this.field.chessboardModel.getField(this.field.row + rowVector, this.field.column + columnVector)
-    if (move != null && move.piece == null) addAllowedMove(allowedMoves, MoveType.SILENT, move)
+    const toField = this.field.chessboardModel.getField(this.field.row + rowVector, this.field.column + columnVector)
+    if (toField != null && toField.piece == null) {
+      const move = new Move(this.field, toField)
+      addAllowedMove(allowedMoves, MoveType.SILENT, move)
+    }
   }
 
   #tryAddAttackMove(rowVector, columnVector, allowedMoves) {
-    let move = this.field.chessboardModel.getField(this.field.row + rowVector, this.field.column + columnVector)
-    if (move != null && move.piece != null && move.piece.color != this.color) {
-      move = this.field.chessboardModel.getField(this.field.row + rowVector + rowVector, this.field.column + columnVector + columnVector)
-      if (move != null && move.piece == null) addAllowedMove(allowedMoves, MoveType.ATTACK, move)
+    const attackedField = this.field.chessboardModel.getField(this.field.row + rowVector, this.field.column + columnVector)
+    if (attackedField != null && attackedField.piece != null && attackedField.piece.color != this.color) {
+      const toField = this.field.chessboardModel.getField(this.field.row + rowVector + rowVector, this.field.column + columnVector + columnVector)
+      if (toField != null && toField.piece == null) {
+        const move = new Move(this.field, toField)
+        move.attackedPiece = attackedField.piece
+        addAllowedMove(allowedMoves, MoveType.ATTACK, move)
+      }
     }
   }
 }
@@ -200,25 +255,51 @@ class Queen extends Piece {
 
   #tryRayCastAndAddMoves(rowVector, columnVector, allowedMoves) {
     let row = this.field.row + rowVector, column = this.field.column + columnVector
-    let move = this.field.chessboardModel.getField(row, column)
-    let addSilentMove = true
-    while (move != null) {
-      if (move.piece != null) {
-        if (!addSilentMove || move.piece.color == this.color) return
-        addSilentMove = false
+    let toField = this.field.chessboardModel.getField(row, column)
+    let move = new Move(this.field, toField)
+    while (toField != null) {
+      if (toField.piece != null) {
+        if (move.attackedPiece != null || toField.piece.color == this.color) return
+        move.attackedPiece = toField.piece
       }
       else {
-        if (addSilentMove) addAllowedMove(allowedMoves, MoveType.SILENT, move)
+        move.toField = toField
+        if (move.attackedPiece == null) addAllowedMove(allowedMoves, MoveType.SILENT, move)
         else addAllowedMove(allowedMoves, MoveType.ATTACK, move)
+        const oldMove = move
+        move = new Move(this.field, toField)
+        move.attackedPiece = oldMove.attackedPiece
       }
       row += rowVector
       column += columnVector
-      move = this.field.chessboardModel.getField(row, column)
+      toField = this.field.chessboardModel.getField(row, column)
     }
   }
 }
 
+class Move {
+
+  /**
+   * @param {Field} fromField
+   * @param {Field} toField
+   */
+  constructor(fromField, toField) {
+    this.fromField = fromField
+    this.toField = toField
+    this.attackedPiece = null
+  }
+}
+
 class MoveHistory {
+
+  constructor() {
+    this.moves = new Array()
+  }
+
+  undo() {
+    const lastMove = this.moves[this.moves.length - 1]
+    // TODO: perform undo lastMove in board
+  }
 
   /**
    * @returns {string}
