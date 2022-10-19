@@ -22,7 +22,11 @@ class ChessboardController {
       this.selectedField = null;
       this.#toggleHints(currentField, false);
       if (this.isChainMove) {
-        this.chessboardView.setSelectableField(currentField.row, currentField.column, true);
+        this.chessboardView.setSelectableField(
+          currentField.row,
+          currentField.column,
+          true
+        );
       } else {
         this.#toggleAllSelectableFields(true);
       }
@@ -60,14 +64,21 @@ class ChessboardController {
     this.#renderMove(move);
 
     this.isChainMove = false;
-    if (move.attackedPiece != null && this.chessboardModel.rules.canAttackChainMove) {
-      const movesFromDestination = this.chessboardModel.getPossibleMoves(move.toField.row, move.toField.column);
+    if (
+      move.attackedPiece != null &&
+      this.chessboardModel.rules.canAttackChainMove
+    ) {
+      const movesFromDestination = this.chessboardModel.getPossibleMoves(
+        move.toField.row,
+        move.toField.column
+      );
       if (movesFromDestination.has(MoveType.ATTACK)) {
         this.isChainMove = true;
         this.selectedField = toField;
         this.#toggleHints(this.selectedField, true);
 
-        if (!this.chessboardModel.rules.isAttackMandatory) this.chessboardView.toggleMoveButtons(true); // TODO(?): add rule whether you can interrupt chain move
+        if (!this.chessboardModel.rules.isAttackMandatory)
+          this.chessboardView.toggleMoveButtons(true); // TODO(?): add rule whether you can interrupt chain move
       } else {
         this.#endMove();
       }
@@ -83,16 +94,31 @@ class ChessboardController {
 
   #renderMove(move) {
     this.#renderPiece(null, move.fromField.row, move.fromField.column);
-    this.#renderPiece(move.toField.piece, move.toField.row, move.toField.column);
+    this.#renderPiece(
+      move.toField.piece,
+      move.toField.row,
+      move.toField.column
+    );
     if (move.attackedPiece != null) {
-      this.#renderPiece(null, move.attackedPiece.field.row, move.attackedPiece.field.column);
+      this.#renderPiece(
+        null,
+        move.attackedPiece.field.row,
+        move.attackedPiece.field.column
+      );
     }
   }
 
   #toggleAllSelectableFields(enableSelectable) {
     this.chessboardModel.forEachField((field) => {
-      if (field.piece != null && field.piece.color == this.chessboardModel.currentPlayerColor) {
-        this.chessboardView.setSelectableField(field.row, field.column, enableSelectable);
+      if (
+        field.piece != null &&
+        field.piece.color == this.chessboardModel.currentPlayerColor
+      ) {
+        this.chessboardView.setSelectableField(
+          field.row,
+          field.column,
+          enableSelectable
+        );
       }
       return true;
     });
@@ -109,7 +135,11 @@ class ChessboardController {
     this.chessboardModel.forEachField((field) => {
       if (field.piece != null) {
         if (field.piece.color == this.chessboardModel.currentPlayerColor) {
-          this.chessboardView.setSelectableField(field.row, field.column, false);
+          this.chessboardView.setSelectableField(
+            field.row,
+            field.column,
+            false
+          );
         } else {
           this.chessboardView.setSelectableField(field.row, field.column, true);
         }
@@ -122,8 +152,15 @@ class ChessboardController {
    * Toggles visual hints for specified field based on possible moves from it
    */
   #toggleHints(field, enableHints) {
-    this.chessboardView.setFieldType(field.row, field.column, enableHints ? FieldType.SELECTED : FieldType.NONE);
-    const moves = this.chessboardModel.getPossibleMoves(field.row, field.column);
+    this.chessboardView.setFieldType(
+      field.row,
+      field.column,
+      enableHints ? FieldType.SELECTED : FieldType.NONE
+    );
+    const moves = this.chessboardModel.getPossibleMoves(
+      field.row,
+      field.column
+    );
     moves.get(MoveType.SILENT)?.forEach((move) => {
       this.chessboardView.setFieldType(
         move.toField.row,
@@ -163,10 +200,12 @@ class ChessboardController {
   #renderPiece(piece, row, column) {
     if (piece == null) this.chessboardView.setEmptyField(row, column);
     else if (piece instanceof Pawn) {
-      if (piece.color == PieceColor.BLACK) this.chessboardView.setBlackPawn(row, column);
+      if (piece.color == PieceColor.BLACK)
+        this.chessboardView.setBlackPawn(row, column);
       else this.chessboardView.setWhitePawn(row, column);
     } else if (piece instanceof Queen) {
-      if (piece.color == PieceColor.BLACK) this.chessboardView.setBlackQueen(row, column);
+      if (piece.color == PieceColor.BLACK)
+        this.chessboardView.setBlackQueen(row, column);
       else this.chessboardView.setWhiteQueen(row, column);
     } else throw new Error(`Unknown field code: ${piece}`);
   }

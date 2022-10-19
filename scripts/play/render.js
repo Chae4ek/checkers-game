@@ -1,8 +1,9 @@
 class ChessboardView {
   constructor() {
-    this.cells = Array.from(document.getElementsByClassName("chessboard")[0].firstElementChild.children).map((x) =>
-      Array.from(x.children)
-    );
+    this.cells = Array.from(
+      document.getElementsByClassName("chessboard")[0].firstElementChild
+        .children
+    ).map((x) => Array.from(x.children));
   }
 
   /**
@@ -11,7 +12,8 @@ class ChessboardView {
   setClickOnFieldListener(chessboardController) {
     for (let row = 0; row < this.cells.length; ++row) {
       for (let column = 0; column < this.cells[0].length; ++column) {
-        this.cells[row][column].onclick = () => chessboardController.clickOnFieldEvent(row, column);
+        this.cells[row][column].onclick = () =>
+          chessboardController.clickOnFieldEvent(row, column);
       }
     }
   }
@@ -43,13 +45,22 @@ class ChessboardView {
       case FieldType.NONE:
         break;
       case FieldType.SELECTED:
-        classList.add("chessboard-field-selected", "chessboard-selectable_field");
+        classList.add(
+          "chessboard-field-selected",
+          "chessboard-selectable_field"
+        );
         break;
       case FieldType.SILENT_MOVE:
-        classList.add("chessboard-field-silent_move", "chessboard-selectable_field");
+        classList.add(
+          "chessboard-field-silent_move",
+          "chessboard-selectable_field"
+        );
         break;
       case FieldType.ATTACK_MOVE:
-        classList.add("chessboard-field-attack_move", "chessboard-selectable_field");
+        classList.add(
+          "chessboard-field-attack_move",
+          "chessboard-selectable_field"
+        );
         break;
       default:
         throw new Error(`Unknown field type: ${fieldType}`);
@@ -57,12 +68,16 @@ class ChessboardView {
   }
 
   isSelectableField(row, column) {
-    return this.cells[row][column].classList.contains("chessboard-selectable_field");
+    return this.cells[row][column].classList.contains(
+      "chessboard-selectable_field"
+    );
   }
 
   setSelectableField(row, column, isSelectable) {
-    if (isSelectable) this.cells[row][column].classList.add("chessboard-selectable_field");
-    else this.cells[row][column].classList.remove("chessboard-selectable_field");
+    if (isSelectable)
+      this.cells[row][column].classList.add("chessboard-selectable_field");
+    else
+      this.cells[row][column].classList.remove("chessboard-selectable_field");
   }
 
   setEmptyField(row, column) {

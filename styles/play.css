@@ -60,12 +60,16 @@ table.chessboard tr td.chessboard-field-selected {
   color: var(--chessboard-field-selected_black_color);
 }
 
-table.chessboard tr:nth-child(odd) td:nth-child(even).chessboard-field-selected {
+table.chessboard
+  tr:nth-child(odd)
+  td:nth-child(even).chessboard-field-selected {
   background-color: var(--chessboard-field-selected_black_color);
   color: var(--chessboard-field-selected_white_color);
 }
 
-table.chessboard tr:nth-child(even) td:nth-child(odd).chessboard-field-selected {
+table.chessboard
+  tr:nth-child(even)
+  td:nth-child(odd).chessboard-field-selected {
   background-color: var(--chessboard-field-selected_black_color);
   color: var(--chessboard-field-selected_white_color);
 }
@@ -75,12 +79,16 @@ table.chessboard tr td.chessboard-field-silent_move {
   color: var(--chessboard-field-silent_move_black_color);
 }
 
-table.chessboard tr:nth-child(odd) td:nth-child(even).chessboard-field-silent_move {
+table.chessboard
+  tr:nth-child(odd)
+  td:nth-child(even).chessboard-field-silent_move {
   background-color: var(--chessboard-field-silent_move_black_color);
   color: var(--chessboard-field-silent_move_white_color);
 }
 
-table.chessboard tr:nth-child(even) td:nth-child(odd).chessboard-field-silent_move {
+table.chessboard
+  tr:nth-child(even)
+  td:nth-child(odd).chessboard-field-silent_move {
   background-color: var(--chessboard-field-silent_move_black_color);
   color: var(--chessboard-field-silent_move_white_color);
 }
@@ -90,12 +98,16 @@ table.chessboard tr td.chessboard-field-attack_move {
   color: var(--chessboard-field-attack_move_black_color);
 }
 
-table.chessboard tr:nth-child(odd) td:nth-child(even).chessboard-field-attack_move {
+table.chessboard
+  tr:nth-child(odd)
+  td:nth-child(even).chessboard-field-attack_move {
   background-color: var(--chessboard-field-attack_move_black_color);
   color: var(--chessboard-field-attack_move_white_color);
 }
 
-table.chessboard tr:nth-child(even) td:nth-child(odd).chessboard-field-attack_move {
+table.chessboard
+  tr:nth-child(even)
+  td:nth-child(odd).chessboard-field-attack_move {
   background-color: var(--chessboard-field-attack_move_black_color);
   color: var(--chessboard-field-attack_move_white_color);
 }
