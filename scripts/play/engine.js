@@ -1,10 +1,5 @@
 class Rules {
-  constructor(
-    canAttackMoveBackward,
-    isAttackMandatory,
-    firstPlayerIsWhite,
-    canAttackChainMove
-  ) {
+  constructor(canAttackMoveBackward, isAttackMandatory, firstPlayerIsWhite, canAttackChainMove) {
     this.canAttackMoveBackward = canAttackMoveBackward;
     this.isAttackMandatory = isAttackMandatory;
     this.firstPlayerIsWhite = firstPlayerIsWhite;
@@ -42,8 +37,15 @@ class ChessboardModel {
     return null;
   }
 
+  /**
+   * Undo last move and returns it
+   *
+   * @returns {Move?} previous move or null if none
+   */
   undoMove() {
+    const lastMove = this.moveHistory.moves.pop();
     // TODO
+    return lastMove;
   }
 
   /**
@@ -51,10 +53,7 @@ class ChessboardModel {
    */
   #createMove(fromField, toField) {
     const createdMove = new Move(fromField, toField);
-    for (const [, moves] of this.getPossibleMoves(
-      fromField.row,
-      fromField.column
-    )) {
+    for (const [, moves] of this.getPossibleMoves(fromField.row, fromField.column)) {
       for (const move of moves) {
         if (move.toField == toField) {
           createdMove.attackedPiece = move.attackedPiece;
@@ -69,12 +68,8 @@ class ChessboardModel {
     let piece = move.fromField.piece;
     piece.field = move.toField;
     if (piece instanceof Pawn) {
-      if (piece.color == PieceColor.WHITE && move.toField.row == 0)
-        piece = new Queen(move.toField, piece.color);
-      if (
-        piece.color == PieceColor.BLACK &&
-        move.toField.row == this.board[0].length - 1
-      )
+      if (piece.color == PieceColor.WHITE && move.toField.row == 0) piece = new Queen(move.toField, piece.color);
+      if (piece.color == PieceColor.BLACK && move.toField.row == this.board[0].length - 1)
         piece = new Queen(move.toField, piece.color);
     }
     move.toField.piece = piece;
@@ -108,28 +103,16 @@ class ChessboardModel {
           this.board[row][column].piece = null;
           break;
         case "p":
-          this.board[row][column].piece = new Pawn(
-            this.board[row][column],
-            PieceColor.BLACK
-          );
+          this.board[row][column].piece = new Pawn(this.board[row][column], PieceColor.BLACK);
           break;
         case "P":
-          this.board[row][column].piece = new Pawn(
-            this.board[row][column],
-            PieceColor.WHITE
-          );
+          this.board[row][column].piece = new Pawn(this.board[row][column], PieceColor.WHITE);
           break;
         case "q":
-          this.board[row][column].piece = new Queen(
-            this.board[row][column],
-            PieceColor.BLACK
-          );
+          this.board[row][column].piece = new Queen(this.board[row][column], PieceColor.BLACK);
           break;
         case "Q":
-          this.board[row][column].piece = new Queen(
-            this.board[row][column],
-            PieceColor.WHITE
-          );
+          this.board[row][column].piece = new Queen(this.board[row][column], PieceColor.WHITE);
           break;
         default:
           throw new Error(`Incorrect FAN. Unknown character: ${FAN[i]}`);
@@ -144,18 +127,10 @@ class ChessboardModel {
     const moves = this.#getPossibleMovesWithoutRules(row, column);
 
     if (this.rules.isAttackMandatory) {
-      if (moves.has(MoveType.ATTACK) || !moves.has(MoveType.SILENT))
-        return moves;
+      if (moves.has(MoveType.ATTACK) || !moves.has(MoveType.SILENT)) return moves;
       this.forEachField((field) => {
-        if (
-          field.piece != null &&
-          field.piece.color == this.board[row][column].piece.color
-        ) {
-          if (
-            this.#getPossibleMovesWithoutRules(field.row, field.column).has(
-              MoveType.ATTACK
-            )
-          ) {
+        if (field.piece != null && field.piece.color == this.board[row][column].piece.color) {
+          if (this.#getPossibleMovesWithoutRules(field.row, field.column).has(MoveType.ATTACK)) {
             moves.delete(MoveType.SILENT);
             return false;
           }
@@ -168,21 +143,14 @@ class ChessboardModel {
   }
 
   #getPossibleMovesWithoutRules(row, column) {
-    return this.board[row][column].piece == null
-      ? new Map()
-      : this.board[row][column].piece.getPossibleMoves();
+    return this.board[row][column].piece == null ? new Map() : this.board[row][column].piece.getPossibleMoves();
   }
 
   /**
    * @returns {Field?} field if its coords are correct
    */
   getField(row, column) {
-    if (
-      row >= 0 &&
-      row < this.board.length &&
-      column >= 0 &&
-      column < this.board[0].length
-    )
+    if (row >= 0 && row < this.board.length && column >= 0 && column < this.board[0].length)
       return this.board[row][column];
     return null;
   }
@@ -247,10 +215,7 @@ class Pawn extends Piece {
       this.#tryAddAttackMove(-colorCoeff, -1, allowedMoves);
       this.#tryAddAttackMove(-colorCoeff, 1, allowedMoves);
     }
-    if (
-      allowedMoves.size == 0 ||
-      !this.field.chessboardModel.rules.isAttackMandatory
-    ) {
+    if (allowedMoves.size == 0 || !this.field.chessboardModel.rules.isAttackMandatory) {
       this.#tryAddSilentMove(colorCoeff, -1, allowedMoves);
       this.#tryAddSilentMove(colorCoeff, 1, allowedMoves);
     }
@@ -258,10 +223,7 @@ class Pawn extends Piece {
   }
 
   #tryAddSilentMove(rowVector, columnVector, allowedMoves) {
-    const toField = this.field.chessboardModel.getField(
-      this.field.row + rowVector,
-      this.field.column + columnVector
-    );
+    const toField = this.field.chessboardModel.getField(this.field.row + rowVector, this.field.column + columnVector);
     if (toField != null && toField.piece == null) {
       const move = new Move(this.field, toField);
       addAllowedMove(allowedMoves, MoveType.SILENT, move);
@@ -273,11 +235,7 @@ class Pawn extends Piece {
       this.field.row + rowVector,
       this.field.column + columnVector
     );
-    if (
-      attackedField != null &&
-      attackedField.piece != null &&
-      attackedField.piece.color != this.color
-    ) {
+    if (attackedField != null && attackedField.piece != null && attackedField.piece.color != this.color) {
       const toField = this.field.chessboardModel.getField(
         this.field.row + rowVector + rowVector,
         this.field.column + columnVector + columnVector
@@ -298,10 +256,7 @@ class Queen extends Piece {
     this.#tryRayCastAndAddMoves(1, -1, allowedMoves);
     this.#tryRayCastAndAddMoves(-1, 1, allowedMoves);
     this.#tryRayCastAndAddMoves(-1, -1, allowedMoves);
-    if (
-      this.field.chessboardModel.rules.isAttackMandatory &&
-      allowedMoves.has(MoveType.ATTACK)
-    ) {
+    if (this.field.chessboardModel.rules.isAttackMandatory && allowedMoves.has(MoveType.ATTACK)) {
       allowedMoves.delete(MoveType.SILENT);
     }
     return allowedMoves;
@@ -314,13 +269,11 @@ class Queen extends Piece {
     let move = new Move(this.field, toField);
     while (toField != null) {
       if (toField.piece != null) {
-        if (move.attackedPiece != null || toField.piece.color == this.color)
-          return;
+        if (move.attackedPiece != null || toField.piece.color == this.color) return;
         move.attackedPiece = toField.piece;
       } else {
         move.toField = toField;
-        if (move.attackedPiece == null)
-          addAllowedMove(allowedMoves, MoveType.SILENT, move);
+        if (move.attackedPiece == null) addAllowedMove(allowedMoves, MoveType.SILENT, move);
         else addAllowedMove(allowedMoves, MoveType.ATTACK, move);
         const oldMove = move;
         move = new Move(this.field, toField);
@@ -348,11 +301,6 @@ class Move {
 class MoveHistory {
   constructor() {
     this.moves = new Array();
-  }
-
-  undo() {
-    const lastMove = this.moves[this.moves.length - 1];
-    // TODO: perform undo lastMove in board
   }
 
   /**

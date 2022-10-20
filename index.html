@@ -5,11 +5,7 @@
     <title>Checkers Game | About</title>
     <link rel="icon" type="image/x-icon" href="favicon.svg" />
     <link rel="stylesheet" href="styles/about.css" />
-    <link
-      rel="stylesheet"
-      href="styles/mobile-about.css"
-      media="screen and (max-width: 1080px)"
-    />
+    <link rel="stylesheet" href="styles/mobile-about.css" media="screen and (max-width: 1080px)" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -33,19 +29,13 @@
         <div class="main-left">
           <div class="module-active_block">
             <div class="module-block-image_border">
-              <img
-                class="module-block-image non-selectable"
-                src="images/chessboard.jpg"
-                alt="шахматная доска"
-              />
+              <img class="module-block-image non-selectable" src="images/chessboard.jpg" alt="шахматная доска" />
             </div>
             <h1 class="module-block-title">Об игре</h1>
             <p class="module-block-description">
-              Этот проект реализует игру в шашки на одном компьютере. Вы можете
-              настроить правила игры на странице "Rules" (такие как обязательное
-              взятие или нет, фуки, цепные ходы и другое). Чтобы начать игру,
-              перейдите на страницу "Play". Также используется специальная
-              нотация для возможности сохранения и загрузки игры.
+              Этот проект реализует игру в шашки на одном компьютере. Вы можете настроить правила игры на странице
+              "Rules" (такие как обязательное взятие или нет, фуки, цепные ходы и другое). Чтобы начать игру, перейдите
+              на страницу "Play". Также используется специальная нотация для возможности сохранения и загрузки игры.
             </p>
           </div>
         </div>
@@ -53,75 +43,53 @@
           <div class="module-active_block">
             <h1 class="module-block-title">Нотация</h1>
             <p class="module-block-description">
-              Используется специальная нотация для записи партии игры: начальной
-              расстановки шашек, правил и ходов, так как существуют большое
-              количество разных видов игр в шашки.
+              Используется специальная нотация для записи партии игры: начальной расстановки шашек, правил и ходов, так
+              как существуют большое количество разных видов игр в шашки.
             </p>
             <h2 class="module-block-subtitle">Запись начальной расстановки</h2>
             <p class="module-block-description">
               Расстановка записывается с клетки A8 до клетки H1 построчно.<br />
-              Начальная расстановка не записывается, так как сейчас она может
-              быть только стандартной.
+              Начальная расстановка не записывается, так как сейчас она может быть только стандартной.
             </p>
             <ul class="module-block-list">
-              <li class="module-block-list_element">
-                Символ "-" == пустая клетка.
-              </li>
-              <li class="module-block-list_element">
-                Символ "p" == черная пешка.
-              </li>
-              <li class="module-block-list_element">
-                Символ "P" == белая пешка.
-              </li>
-              <li class="module-block-list_element">
-                Символ "q" == черная дамка.
-              </li>
-              <li class="module-block-list_element">
-                Символ "Q" == белая дамка.
-              </li>
+              <li class="module-block-list_element">Символ "-" == пустая клетка.</li>
+              <li class="module-block-list_element">Символ "p" == черная пешка.</li>
+              <li class="module-block-list_element">Символ "P" == белая пешка.</li>
+              <li class="module-block-list_element">Символ "q" == черная дамка.</li>
+              <li class="module-block-list_element">Символ "Q" == белая дамка.</li>
             </ul>
             <p class="module-block-description text-style-italic">
-              Например:
-              "-p-p-p-pp-p-p-p--p-p-p-p----------------P-P-P-P--P-P-P-PP-P-P-P-"
+              Например: "-p-p-p-pp-p-p-p--p-p-p-p----------------P-P-P-P--P-P-P-PP-P-P-P-"
             </p>
             <h2 class="module-block-subtitle">Запись правил</h2>
-            <p class="module-block-description">
-              Правила не записываются, так как сейчас их нельзя изменить.
-            </p>
+            <p class="module-block-description">Правила не записываются, так как сейчас их нельзя изменить.</p>
             <h2 class="module-block-subtitle">Запись ходов</h2>
             <p class="module-block-description">
-              Ходы разделяются пробелом. Если ходит белый игрок, ход
-              записывается заглавными буквами; если ходит черный игрок, то
-              маленькими буквами. Существует несколько видов ходов:
+              Ходы разделяются пробелом. Если ходит белый игрок, ход записывается заглавными буквами; если ходит черный
+              игрок, то маленькими буквами. Существует несколько видов ходов:
             </p>
             <ul class="module-block-list">
               <li class="module-block-list_element">
-                <span class="text-style-bold">Тихий ход</span>: записывается
-                номер клетки из которой ходят, затем ставится тире и номер
-                клетки, в которую походили.<br />
+                <span class="text-style-bold">Тихий ход</span>: записывается номер клетки из которой ходят, затем
+                ставится тире и номер клетки, в которую походили.<br />
                 <span class="text-style-italic"
-                  >Например: C3-D4 (при условии, что такой ход разрешен
-                  правилами текущей игры)</span
+                  >Например: C3-D4 (при условии, что такой ход разрешен правилами текущей игры)</span
                 >
               </li>
               <li class="module-block-list_element">
-                <span class="text-style-bold">Ход со взятием</span>:
-                записывается номер клетки из которой ходят, затем ставится
-                двоеточие и номер клетки, в которую походили.<br />
+                <span class="text-style-bold">Ход со взятием</span>: записывается номер клетки из которой ходят, затем
+                ставится двоеточие и номер клетки, в которую походили.<br />
                 <span class="text-style-italic"
-                  >Например: C3:E5 (при условии, что на d4 была пешка и такой
-                  ход разрешен правилами текущей игры)</span
+                  >Например: C3:E5 (при условии, что на d4 была пешка и такой ход разрешен правилами текущей игры)</span
                 >
               </li>
               <li class="module-block-list_element">
-                <span class="text-style-bold">Цепной ход</span>: записывается
-                номер клетки из которой ходят, затем номера клеток, в которые
-                наступала шашка во время хода, разделенные двоеточием (если было
-                взятие при текущем переходе) или тире (если текущий переход
-                тихий).<br />
+                <span class="text-style-bold">Цепной ход</span>: записывается номер клетки из которой ходят, затем
+                номера клеток, в которые наступала шашка во время хода, разделенные двоеточием (если было взятие при
+                текущем переходе) или тире (если текущий переход тихий).<br />
                 <span class="text-style-italic"
-                  >Например: c5:e3:g5 (при условии, что на d4 и f4 были пешки и
-                  такой ход разрешен правилами текущей игры)</span
+                  >Например: c5:e3:g5 (при условии, что на d4 и f4 были пешки и такой ход разрешен правилами текущей
+                  игры)</span
                 >
               </li>
             </ul>
@@ -134,9 +102,7 @@
       <h1 class="footer-title">Checkers Game</h1>
       <p class="footer-rights">
         © 2022 - Alexey Nominas. All rights reserved. Check out this project on
-        <a class="footer-link" href="https://github.com/Chae4ek/checkers-game"
-          >GitHub</a
-        >
+        <a class="footer-link" href="https://github.com/Chae4ek/checkers-game">GitHub</a>
       </p>
     </footer>
   </body>

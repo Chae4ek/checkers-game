@@ -86,22 +86,13 @@ header {
   text-decoration: none;
   color: var(--navigation-active_color);
   padding-bottom: 2px;
-  background: 50% 100% / 0 2px
-    linear-gradient(
-      var(--navigation-active_color),
-      var(--navigation-active_color)
-    )
-    no-repeat;
+  background: 50% 100% / 0 2px linear-gradient(var(--navigation-active_color), var(--navigation-active_color)) no-repeat;
   transition: background-size 0.2s, color 0.1s;
 }
 
 .header-link-current_page {
   color: var(--navigation-inactive_color);
-  background: 50% 100% / 0 2px
-    linear-gradient(
-      var(--navigation-inactive_color),
-      var(--navigation-inactive_color)
-    )
+  background: 50% 100% / 0 2px linear-gradient(var(--navigation-inactive_color), var(--navigation-inactive_color))
     no-repeat;
 }
 
@@ -112,11 +103,7 @@ header {
 
 .header-link:active {
   color: var(--navigation-selected_color);
-  background: 50% 100% / 0 2px
-    linear-gradient(
-      var(--navigation-selected_color),
-      var(--navigation-selected_color)
-    )
+  background: 50% 100% / 0 2px linear-gradient(var(--navigation-selected_color), var(--navigation-selected_color))
     no-repeat;
 }
 
