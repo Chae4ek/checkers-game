@@ -174,6 +174,11 @@ class ChessboardController {
    * @param {string} FAN
    */
   setChessboard(FAN) {
+    if (this.selectedField != null) {
+      this.#toggleHints(this.selectedField, false);
+      this.selectedField = null;
+    }
+    this.isChainMove = false;
     this.chessboardView.toggleMoveButtons(false);
     this.chessboardModel.setBoard(FAN);
 

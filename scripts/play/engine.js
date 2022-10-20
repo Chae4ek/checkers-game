@@ -106,6 +106,7 @@ class ChessboardModel {
     if (FAN.length != this.board.length * this.board[0].length) {
       throw new Error(`FAN size (${FAN.length}) is not equal board size (64)`);
     }
+    this.moveHistory = new MoveHistory();
 
     for (let i = 0; i < FAN.length; ++i) {
       const row = Math.floor(i / 8);
