@@ -114,6 +114,7 @@ main {
 }
 
 .main-content {
+  font-size: 0;
   margin: 80px 50px 0 50px;
 }
 
