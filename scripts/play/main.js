@@ -15,7 +15,8 @@ function clickOnCopyButton(chessboardController) {
 
 function clickOnExampleButton(chessboardController) {
   chessboardController.setChessboard(
-    "-p------" + "--p-p---" + "-------p" + "--p-----" + "-----P-P" + "--------" + "--------" + "--q-----"
+    // "-p------" + "--p-p---" + "-------p" + "--p-----" + "-----P-P" + "--------" + "--------" + "--q-----"
+    "-p-p---p" + "p-p-p-p-" + "-----p--" + "--p-p-p-" + "---P-P--" + "P-P---p-" + "-P-P-P-P" + "P-P-P-P-"
   );
 }
 

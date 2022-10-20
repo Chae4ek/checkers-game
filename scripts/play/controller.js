@@ -39,9 +39,33 @@ class ChessboardController {
   }
 
   clickOnCancelButton() {
-    this.chessboardModel.undoMove();
-    // TODO: render
-    // TODO: enable selectable
+    if (this.isChainMove) {
+      if (this.selectedField != null) {
+        this.#toggleHints(this.selectedField, false);
+        this.selectedField = null;
+      }
+    }
+    const lastMove = this.chessboardModel.undoMove();
+    this.#renderPiece(null, lastMove.toField.row, lastMove.toField.column);
+    this.#renderPiece(lastMove.pieceToMove, lastMove.fromField.row, lastMove.fromField.column);
+    if (lastMove.attackedPiece != null) {
+      this.#renderPiece(lastMove.attackedPiece, lastMove.attackedField.row, lastMove.attackedField.column);
+    }
+
+    if (this.chessboardModel.isNowChainAttack()) {
+      this.isChainMove = true;
+      this.selectedField = lastMove.fromField;
+      this.#toggleHints(this.selectedField, true);
+    } else {
+      this.isChainMove = false;
+      this.chessboardView.toggleMoveButtons(false);
+      this.#toggleAllSelectableFields(true);
+    }
+
+    if (this.isChainMove && this.chessboardModel.rules.isAttackMandatory) {
+      // TODO(?): add rule whether you can interrupt chain move
+      this.chessboardView.toggleEndButton(false);
+    }
   }
 
   clickOnEndButton() {
@@ -67,7 +91,11 @@ class ChessboardController {
         this.selectedField = toField;
         this.#toggleHints(this.selectedField, true);
 
-        if (!this.chessboardModel.rules.isAttackMandatory) this.chessboardView.toggleMoveButtons(true); // TODO(?): add rule whether you can interrupt chain move
+        this.chessboardView.toggleCancelButton(true);
+        if (!this.chessboardModel.rules.isAttackMandatory) {
+          // TODO(?): add rule whether you can interrupt chain move
+          this.chessboardView.toggleEndButton(true);
+        }
       } else {
         this.#endMove();
       }
@@ -85,7 +113,7 @@ class ChessboardController {
     this.#renderPiece(null, move.fromField.row, move.fromField.column);
     this.#renderPiece(move.toField.piece, move.toField.row, move.toField.column);
     if (move.attackedPiece != null) {
-      this.#renderPiece(null, move.attackedPiece.field.row, move.attackedPiece.field.column);
+      this.#renderPiece(null, move.attackedField.row, move.attackedField.column);
     }
   }
 
@@ -99,6 +127,7 @@ class ChessboardController {
   }
 
   #toggleCurrentPlayer() {
+    // TODO: move to engine logic
     this.#toggleSelectableFieldsForCurrentPlayer();
     if (this.chessboardModel.currentPlayerColor == PieceColor.WHITE)
       this.chessboardModel.currentPlayerColor = PieceColor.BLACK;

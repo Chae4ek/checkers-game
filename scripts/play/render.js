@@ -17,13 +17,18 @@ class ChessboardView {
   }
 
   toggleMoveButtons(enable) {
-    if (enable) {
-      document.getElementById("button-cancel").removeAttribute("disabled");
-      document.getElementById("button-end").removeAttribute("disabled");
-    } else {
-      document.getElementById("button-cancel").setAttribute("disabled", true);
-      document.getElementById("button-end").setAttribute("disabled", true);
-    }
+    this.toggleCancelButton(enable);
+    this.toggleEndButton(enable);
+  }
+
+  toggleCancelButton(enable) {
+    if (enable) document.getElementById("button-cancel").removeAttribute("disabled");
+    else document.getElementById("button-cancel").setAttribute("disabled", true);
+  }
+
+  toggleEndButton(enable) {
+    if (enable) document.getElementById("button-end").removeAttribute("disabled");
+    else document.getElementById("button-end").setAttribute("disabled", true);
   }
 
   /**
