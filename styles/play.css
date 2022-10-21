@@ -16,6 +16,7 @@
   --button-border-active_color: #d7b55b40;
   --copy_button-border-active_color: #af86d040;
   --copy_button-background-selected_color: #2d253a;
+  --game_info-color: #fff;
 }
 
 table.chessboard {
@@ -183,6 +184,16 @@ table.chessboard tr:nth-child(even) td:nth-child(odd).chessboard-field-attack_mo
   font-size: 20px;
   text-align: left;
   margin: 16px;
+}
+
+#game_info-text {
+  font-family: var(--main-font-family);
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  text-align: left;
+  margin-top: 25px;
+  color: var(--game_info-color);
 }
 
 #button-copy {

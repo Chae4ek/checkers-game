@@ -72,7 +72,28 @@ class ChessboardController {
     this.chessboardView.toggleMoveButtons(false);
     this.chessboardView.setHistoryText(this.chessboardModel.moveHistory.convertToString());
     this.#toggleCurrentPlayer();
-    // TODO: check the end of game (condition)
+    this.chessboardView.setGameInfoText(this.#getGameInfoString());
+  }
+
+  #getGameInfoString() {
+    let currentPlayerHasMoves = false;
+    this.chessboardModel.forEachField((field) => {
+      if (field.piece != null && field.piece.color == this.chessboardModel.currentPlayerColor) {
+        if (this.chessboardModel.getPossibleMoves(field.row, field.column).size != 0) {
+          currentPlayerHasMoves = true;
+          return false;
+        }
+      }
+      return true;
+    });
+
+    if (!currentPlayerHasMoves) {
+      if (this.chessboardModel.currentPlayerColor == PieceColor.WHITE) return "Игра окончена: чёрные победили";
+      return "Игра окончена: белые победили";
+    }
+
+    if (this.chessboardModel.currentPlayerColor == PieceColor.WHITE) return "Ход белых";
+    return "Ход чёрных";
   }
 
   /**
@@ -194,6 +215,7 @@ class ChessboardController {
 
     this.chessboardModel.currentPlayerColor = PieceColor.BLACK; // TODO: specify in FAN param whose turn it is now
     this.#toggleCurrentPlayer();
+    this.chessboardView.setGameInfoText(this.#getGameInfoString());
   }
 
   #renderPiece(piece, row, column) {

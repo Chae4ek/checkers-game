@@ -20,6 +20,10 @@ class ChessboardView {
     document.getElementById("move_history-text").textContent = text;
   }
 
+  setGameInfoText(text) {
+    document.getElementById("game_info-text").textContent = text;
+  }
+
   toggleMoveButtons(enable) {
     this.toggleCancelButton(enable);
     this.toggleEndButton(enable);

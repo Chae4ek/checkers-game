@@ -9,6 +9,10 @@
   .move_history {
     margin-top: 25px;
     width: 100%;
+    order: 2;
+  }
+  #game_info-text {
+    width: 100%;
     order: 1;
   }
   .interface-row {
