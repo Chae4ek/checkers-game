@@ -3,6 +3,10 @@ class ChessboardView {
     this.cells = Array.from(document.getElementsByClassName("chessboard")[0].firstElementChild.children).map((x) =>
       Array.from(x.children)
     );
+    this.moveHistoryText = document.getElementById("move_history-text");
+    this.gameInfoText = document.getElementById("game_info-text");
+    this.buttonCancel = document.getElementById("button-cancel");
+    this.buttonEnd = document.getElementById("button-end");
   }
 
   /**
@@ -17,11 +21,11 @@ class ChessboardView {
   }
 
   setHistoryText(text) {
-    document.getElementById("move_history-text").textContent = text;
+    this.moveHistoryText.textContent = text;
   }
 
   setGameInfoText(text) {
-    document.getElementById("game_info-text").textContent = text;
+    this.gameInfoText.textContent = text;
   }
 
   toggleMoveButtons(enable) {
@@ -30,13 +34,13 @@ class ChessboardView {
   }
 
   toggleCancelButton(enable) {
-    if (enable) document.getElementById("button-cancel").removeAttribute("disabled");
-    else document.getElementById("button-cancel").setAttribute("disabled", true);
+    if (enable) this.buttonCancel.removeAttribute("disabled");
+    else this.buttonCancel.setAttribute("disabled", true);
   }
 
   toggleEndButton(enable) {
-    if (enable) document.getElementById("button-end").removeAttribute("disabled");
-    else document.getElementById("button-end").setAttribute("disabled", true);
+    if (enable) this.buttonEnd.removeAttribute("disabled");
+    else this.buttonEnd.setAttribute("disabled", true);
   }
 
   /**
