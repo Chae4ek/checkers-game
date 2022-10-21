@@ -180,7 +180,7 @@ main {
   text-indent: 100%;
   white-space: nowrap;
   overflow: hidden;
-  background-color: var(--block-border-inactive_color);
+  background-color: var(--block-border-active_color);
   transform: scale(1);
   transition: transform 0.2s, opacity 0.15s;
 }

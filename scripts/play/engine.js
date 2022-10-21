@@ -335,7 +335,10 @@ class MoveHistory {
     for (const move of this.moves) {
       let part = "";
 
-      if (prevMove.toField != move.fromField) part += " " + this.#fieldToString(move.fromField);
+      if (prevMove.toField != move.fromField) {
+        if (move != this.moves[0]) part += " ";
+        part += this.#fieldToString(move.fromField);
+      }
 
       if (move.attackedPiece != null) part += ":";
       else part += "-";
