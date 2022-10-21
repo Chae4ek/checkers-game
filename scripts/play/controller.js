@@ -66,11 +66,12 @@ class ChessboardController {
       // TODO(?): add rule whether you can interrupt chain move
       this.chessboardView.toggleEndButton(false);
     }
+
+    this.chessboardView.setHistoryText(this.chessboardModel.moveHistory.convertToString());
   }
 
   clickOnEndButton() {
     this.chessboardView.toggleMoveButtons(false);
-    this.chessboardView.setHistoryText(this.chessboardModel.moveHistory.convertToString());
     this.#toggleCurrentPlayer();
     this.chessboardView.setGameInfoText(this.#getGameInfoString());
   }
@@ -104,6 +105,7 @@ class ChessboardController {
     const move = this.chessboardModel.tryMove(fromField, toField);
     if (move == null) return;
     this.#renderMove(move);
+    this.chessboardView.setHistoryText(this.chessboardModel.moveHistory.convertToString());
 
     this.isChainMove = false;
     if (move.attackedPiece != null && this.chessboardModel.rules.canAttackChainMove) {

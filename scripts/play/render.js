@@ -4,10 +4,12 @@ class ChessboardView {
       Array.from(x.children)
     );
     this.moveHistoryText = document.getElementById("move_history-text");
-    this.moveHistoryText.value = null;
     this.gameInfoText = document.getElementById("game_info-text");
     this.buttonCancel = document.getElementById("button-cancel");
     this.buttonEnd = document.getElementById("button-end");
+
+    this.setHistoryText(null);
+    this.toggleMoveButtons(false);
   }
 
   /**
