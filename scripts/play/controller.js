@@ -180,6 +180,7 @@ class ChessboardController {
     }
     this.isChainMove = false;
     this.chessboardView.toggleMoveButtons(false);
+    this.#toggleAllSelectableFields(false);
     this.chessboardModel.setBoard(FAN);
 
     const board = this.chessboardModel.board;
@@ -189,7 +190,6 @@ class ChessboardController {
       }
     }
 
-    this.#toggleAllSelectableFields(false);
     this.chessboardModel.currentPlayerColor = PieceColor.BLACK; // TODO: specify in FAN param whose turn it is now
     this.#toggleCurrentPlayer();
   }
