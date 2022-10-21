@@ -70,6 +70,7 @@ class ChessboardController {
 
   clickOnEndButton() {
     this.chessboardView.toggleMoveButtons(false);
+    this.chessboardView.setHistoryText(this.chessboardModel.moveHistory.convertToString());
     this.#toggleCurrentPlayer();
     // TODO: check the end of game (condition)
   }
@@ -174,6 +175,7 @@ class ChessboardController {
    * @param {string} FAN
    */
   setChessboard(FAN) {
+    this.chessboardView.setHistoryText(null);
     if (this.selectedField != null) {
       this.#toggleHints(this.selectedField, false);
       this.selectedField = null;

@@ -330,7 +330,31 @@ class MoveHistory {
    * @returns {string}
    */
   convertToString() {
-    // TODO
-    return "TODO: return move history string";
+    let historyString = "";
+    let prevMove = this.moves[0];
+    for (const move of this.moves) {
+      let part = "";
+
+      if (prevMove.toField != move.fromField) part += " " + this.#fieldToString(move.fromField);
+
+      if (move.attackedPiece != null) part += ":";
+      else part += "-";
+
+      part += this.#fieldToString(move.toField);
+
+      if (move.pieceToMove.color == PieceColor.WHITE) part = part.toUpperCase();
+
+      historyString += part;
+      prevMove = move;
+    }
+    return historyString;
+  }
+
+  /**
+   * @param {Field} field
+   * @returns {string}
+   */
+  #fieldToString(field) {
+    return String.fromCharCode("a".charCodeAt(0) + field.column) + (8 - field.row);
   }
 }

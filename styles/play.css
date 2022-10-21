@@ -163,30 +163,26 @@ table.chessboard tr:nth-child(even) td:nth-child(odd).chessboard-field-attack_mo
 .move_history {
   display: inline-flex;
   flex-flow: column;
-  height: 250px;
+  min-height: 250px;
   border: 2px solid var(--block-border-inactive_color);
   border-radius: var(--chessboard-board-radius);
-  color: var(--block-description-inactive_color);
+  color: var(--block-description-selected_color);
   background-color: var(--move_history-bg_color);
   transition: color 0.2s, border-color 0.2s;
 }
 
 .move_history:hover {
-  color: var(--block-description-selected_color);
+  color: var(--block-description-active_color);
   border-color: var(--block-border-selected_color);
 }
 
-.move_history-text {
+#move_history-text {
   font-family: var(--main-font-family);
   font-style: normal;
   font-weight: normal;
   font-size: 20px;
   text-align: left;
   margin: 16px;
-}
-
-.text-color-active {
-  color: var(--block-description-active_color);
 }
 
 #button-copy {
