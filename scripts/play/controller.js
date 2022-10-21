@@ -8,7 +8,6 @@ class ChessboardController {
     this.chessboardView = chessboardView;
     this.selectedField = null;
     chessboardView.setClickOnFieldListener(this);
-    this.isChainMove = false;
   }
 
   /**
@@ -21,7 +20,7 @@ class ChessboardController {
     if (this.selectedField == currentField) {
       this.selectedField = null;
       this.#toggleHints(currentField, false);
-      if (this.isChainMove) {
+      if (this.chessboardModel.isNowChainAttack()) {
         this.chessboardView.setSelectableField(currentField.row, currentField.column, true);
       } else {
         this.#toggleAllSelectableFields(true);
@@ -39,13 +38,16 @@ class ChessboardController {
   }
 
   clickOnCancelButton() {
-    if (this.isChainMove) {
+    if (this.chessboardModel.isNowChainAttack()) {
       if (this.selectedField != null) {
         this.#toggleHints(this.selectedField, false);
         this.selectedField = null;
       }
     }
+
     const lastMove = this.chessboardModel.undoMove();
+    this.chessboardView.setSelectableField(lastMove.toField.row, lastMove.toField.column, false);
+
     this.#renderPiece(null, lastMove.toField.row, lastMove.toField.column);
     this.#renderPiece(lastMove.pieceToMove, lastMove.fromField.row, lastMove.fromField.column);
     if (lastMove.attackedPiece != null) {
@@ -53,16 +55,14 @@ class ChessboardController {
     }
 
     if (this.chessboardModel.isNowChainAttack()) {
-      this.isChainMove = true;
       this.selectedField = lastMove.fromField;
       this.#toggleHints(this.selectedField, true);
     } else {
-      this.isChainMove = false;
       this.chessboardView.toggleMoveButtons(false);
       this.#toggleAllSelectableFields(true);
     }
 
-    if (this.isChainMove && this.chessboardModel.rules.isAttackMandatory) {
+    if (this.chessboardModel.isNowChainAttack() && this.chessboardModel.rules.isAttackMandatory) {
       // TODO(?): add rule whether you can interrupt chain move
       this.chessboardView.toggleEndButton(false);
     }
@@ -107,11 +107,9 @@ class ChessboardController {
     this.#renderMove(move);
     this.chessboardView.setHistoryText(this.chessboardModel.moveHistory.convertToString());
 
-    this.isChainMove = false;
     if (move.attackedPiece != null && this.chessboardModel.rules.canAttackChainMove) {
       const movesFromDestination = this.chessboardModel.getPossibleMoves(move.toField.row, move.toField.column);
       if (movesFromDestination.has(MoveType.ATTACK)) {
-        this.isChainMove = true;
         this.selectedField = toField;
         this.#toggleHints(this.selectedField, true);
 
@@ -203,7 +201,6 @@ class ChessboardController {
       this.#toggleHints(this.selectedField, false);
       this.selectedField = null;
     }
-    this.isChainMove = false;
     this.chessboardView.toggleMoveButtons(false);
     this.#toggleAllSelectableFields(false);
     this.chessboardModel.setBoard(FAN);
