@@ -1,7 +1,7 @@
-let rules = new Rules(true, true, true, true);
-let chessboardModel = new ChessboardModel(rules);
-let chessboardView = new ChessboardView();
-let chessboardController = new ChessboardController(chessboardModel, chessboardView);
+const rules = new Rules(false, true, true, true, false);
+const chessboardModel = new ChessboardModel(rules);
+const chessboardView = new ChessboardView();
+const chessboardController = new ChessboardController(chessboardModel, chessboardView);
 
 document.getElementById("button-copy").onclick = () => clickOnCopyButton(chessboardController);
 document.getElementById("button-example").onclick = () => clickOnExampleButton(chessboardController);
