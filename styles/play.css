@@ -184,6 +184,12 @@ table.chessboard tr:nth-child(even) td:nth-child(odd).chessboard-field-attack_mo
   font-size: 20px;
   text-align: left;
   margin: 16px;
+  outline: none;
+  resize: none;
+  height: 170px;
+  border: none;
+  background-color: inherit;
+  color: inherit;
 }
 
 #game_info-text {
