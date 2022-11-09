@@ -23,6 +23,10 @@ class ChessboardView {
     }
   }
 
+  isEndButtonActive() {
+    return !this.buttonEnd.hasAttribute("disabled");
+  }
+
   getHistoryText() {
     return this.moveHistoryText.value;
   }
