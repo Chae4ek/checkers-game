@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Checkers Game | Rules</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.svg" />
+    <link rel="stylesheet" href="../styles/about.css" />
+    <link rel="stylesheet" href="../styles/mobile-about.css" media="screen and (max-width: 1080px)" />
+    <link rel="stylesheet" href="../styles/rules.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700;800&family=Fredoka+One&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <header class="non-selectable">
+      <h1 class="header-left">Checkers Game</h1>
+      <nav class="header-right">
+        <a class="header-link" href="../index.html">About</a>
+        <a class="header-link" href="play.html">Play</a>
+        <a class="header-link header-link-current_page" href="#">Rules</a>
+      </nav>
+    </header>
+
+    <main>
+      <div class="main-content">
+        <div class="main-left">
+          <div class="module-active_block">
+            <h1 class="module-block-title">Начальная позиция</h1>
+            <p class="module-block-description">
+              Доска 8x8, шашки занимают первые три ряда с каждой стороны; белые располагаются, начиная с клетки A1.
+            </p>
+          </div>
+          <div class="module-active_block">
+            <h1 class="module-block-title">Цель игры</h1>
+            <p class="module-block-description">Съесть или запереть все шашки противника.</p>
+          </div>
+        </div>
+        <div class="main-center">
+          <div class="module-active_block">
+            <h1 class="module-block-title">Первый ход</h1>
+            <p class="module-block-description">Белые ходят первыми.</p>
+          </div>
+          <div class="module-active_block">
+            <h1 class="module-block-title">Направление хода</h1>
+            <p class="module-block-description">
+              Простая шашка может ходить только вперед по диагонали, дамка - в любом направлении по диагонали.
+            </p>
+          </div>
+          <div class="module-active_block">
+            <h1 class="module-block-title">Цепной ход</h1>
+            <p class="module-block-description">
+              Одной шашкой можно бить несколько шашек за один ход.<br />
+              <span class="text-style-italic">Это правило также влияет на правило "Обязательное взятие".</span>
+            </p>
+          </div>
+        </div>
+        <div class="main-right">
+          <div class="module-block">
+            <h1 class="module-block-title">Ход со взятием назад</h1>
+            <p class="module-block-description">Простая шашка может бить назад.</p>
+          </div>
+          <div class="module-active_block">
+            <h1 class="module-block-title">Обязательное взятие</h1>
+            <p class="module-block-description">
+              Фуков нет (возможность сделать тихий ход и отдать любую шашку на усмотрение противника, которая могла
+              срубить).
+            </p>
+            <ul class="module-block-list">
+              <li class="module-block-list_element">Если игрок может взять шашку соперника, он обязан это сделать.</li>
+              <li class="module-block-list_element">
+                Если вариантов хода со взятием несколько, можно выбрать любой из них.
+              </li>
+              <li class="module-block-list_element">
+                Если выбранной шашкой можно срубить несколько (цепной ход), игрок обязан рубить, пока это возможно.
+              </li>
+              <li class="module-block-list_element">
+                Если вариантов развития цепного хода несколько, можно выбрать любой из них.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <h1 class="footer-title">Checkers Game</h1>
+      <p class="footer-rights">
+        © 2022 - Alexey Nominas. All rights reserved. Check out this project on
+        <a class="footer-link" href="https://github.com/Chae4ek/checkers-game">GitHub</a>
+      </p>
+    </footer>
+  </body>
+</html>

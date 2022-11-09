@@ -1,0 +1,9 @@
+@media screen and (max-width: 1080px) {
+  .header-right {
+    text-align: right;
+    margin-right: 16px;
+  }
+  .header-link {
+    margin: 0 2% 0 2%;
+  }
+}

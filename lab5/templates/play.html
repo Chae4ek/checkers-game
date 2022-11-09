@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Checkers Game | Play</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.svg" />
+    <link rel="stylesheet" href="../styles/about.css" />
+    <link rel="stylesheet" href="../styles/mobile-about.css" media="screen and (max-width: 1080px)" />
+    <link rel="stylesheet" href="../styles/play.css" />
+    <link rel="stylesheet" href="../styles/mobile-play.css" media="screen and (max-width: 1080px)" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700;800&family=Fredoka+One&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <header class="non-selectable">
+      <h1 class="header-left">Checkers Game</h1>
+      <nav class="header-right">
+        <a class="header-link" href="../index.html">About</a>
+        <a class="header-link header-link-current_page" href="#">Play</a>
+        <a class="header-link" href="rules.html">Rules</a>
+      </nav>
+    </header>
+
+    <main>
+      <div class="main-content">
+        <table class="chessboard non-selectable">
+          <tr>
+            <td class="chessboard-a8">
+              <span class="chessboard_text-align-left_top">8</span>
+            </td>
+            <td class="chessboard-b8"></td>
+            <td class="chessboard-c8"></td>
+            <td class="chessboard-d8"></td>
+            <td class="chessboard-e8"></td>
+            <td class="chessboard-f8"></td>
+            <td class="chessboard-g8"></td>
+            <td class="chessboard-h8"></td>
+          </tr>
+          <tr>
+            <td class="chessboard-a7">
+              <span class="chessboard_text-align-left_top">7</span>
+            </td>
+            <td class="chessboard-b7"></td>
+            <td class="chessboard-c7"></td>
+            <td class="chessboard-d7"></td>
+            <td class="chessboard-e7"></td>
+            <td class="chessboard-f7"></td>
+            <td class="chessboard-g7"></td>
+            <td class="chessboard-h7"></td>
+          </tr>
+          <tr>
+            <td class="chessboard-a6">
+              <span class="chessboard_text-align-left_top">6</span>
+            </td>
+            <td class="chessboard-b6"></td>
+            <td class="chessboard-c6"></td>
+            <td class="chessboard-d6"></td>
+            <td class="chessboard-e6"></td>
+            <td class="chessboard-f6"></td>
+            <td class="chessboard-g6"></td>
+            <td class="chessboard-h6"></td>
+          </tr>
+          <tr>
+            <td class="chessboard-a5">
+              <span class="chessboard_text-align-left_top">5</span>
+            </td>
+            <td class="chessboard-b5"></td>
+            <td class="chessboard-c5"></td>
+            <td class="chessboard-d5"></td>
+            <td class="chessboard-e5"></td>
+            <td class="chessboard-f5"></td>
+            <td class="chessboard-g5"></td>
+            <td class="chessboard-h5"></td>
+          </tr>
+          <tr>
+            <td class="chessboard-a4">
+              <span class="chessboard_text-align-left_top">4</span>
+            </td>
+            <td class="chessboard-b4"></td>
+            <td class="chessboard-c4"></td>
+            <td class="chessboard-d4"></td>
+            <td class="chessboard-e4"></td>
+            <td class="chessboard-f4"></td>
+            <td class="chessboard-g4"></td>
+            <td class="chessboard-h4"></td>
+          </tr>
+          <tr>
+            <td class="chessboard-a3">
+              <span class="chessboard_text-align-left_top">3</span>
+            </td>
+            <td class="chessboard-b3"></td>
+            <td class="chessboard-c3"></td>
+            <td class="chessboard-d3"></td>
+            <td class="chessboard-e3"></td>
+            <td class="chessboard-f3"></td>
+            <td class="chessboard-g3"></td>
+            <td class="chessboard-h3"></td>
+          </tr>
+          <tr>
+            <td class="chessboard-a2">
+              <span class="chessboard_text-align-left_top">2</span>
+            </td>
+            <td class="chessboard-b2"></td>
+            <td class="chessboard-c2"></td>
+            <td class="chessboard-d2"></td>
+            <td class="chessboard-e2"></td>
+            <td class="chessboard-f2"></td>
+            <td class="chessboard-g2"></td>
+            <td class="chessboard-h2"></td>
+          </tr>
+          <tr>
+            <td class="chessboard-a1">
+              <span class="chessboard_text-align-left_top">1</span
+              ><span class="chessboard_text-align-right_bottom chessboard_text-a1_field-align">a</span>
+            </td>
+            <td class="chessboard-b1">
+              <span class="chessboard_text-align-right_bottom">b</span>
+            </td>
+            <td class="chessboard-c1">
+              <span class="chessboard_text-align-right_bottom">c</span>
+            </td>
+            <td class="chessboard-d1">
+              <span class="chessboard_text-align-right_bottom">d</span>
+            </td>
+            <td class="chessboard-e1">
+              <span class="chessboard_text-align-right_bottom">e</span>
+            </td>
+            <td class="chessboard-f1">
+              <span class="chessboard_text-align-right_bottom">f</span>
+            </td>
+            <td class="chessboard-g1">
+              <span class="chessboard_text-align-right_bottom">g</span>
+            </td>
+            <td class="chessboard-h1">
+              <span class="chessboard_text-align-right_bottom">h</span>
+            </td>
+          </tr>
+        </table>
+        <div class="chessboard-interface">
+          <div class="move_history">
+            <textarea id="move_history-text"></textarea>
+            <div class="move_history-buttons">
+              <button id="button-show">Показать</button>
+              <button id="button-copy"></button>
+            </div>
+          </div>
+          <div class="interface-row">
+            <button id="button-example">Пример</button><button id="button-start">Старт</button>
+          </div>
+          <p id="game_info-text">Нажмите "Старт", чтобы начать</p>
+          <div class="interface-row interface-bottom">
+            <button id="button-cancel" disabled></button><button id="button-end" disabled>Завершить ход</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <h1 class="footer-title">Checkers Game</h1>
+      <p class="footer-rights">
+        © 2022 - Alexey Nominas. All rights reserved. Check out this project on
+        <a class="footer-link" href="https://github.com/Chae4ek/checkers-game">GitHub</a>
+      </p>
+    </footer>
+
+    <script type="text/javascript" src="../scripts/play/engine.js"></script>
+    <script type="text/javascript" src="../scripts/play/render.js"></script>
+    <script type="text/javascript" src="../scripts/play/controller.js"></script>
+    <script type="text/javascript" src="../scripts/play/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,334 @@
+:root {
+  --chessboard-field-black_color: #9faf88;
+  --chessboard-field-white_color: #eeeed5;
+  --chessboard-field-selected_black_color: #e5d757;
+  --chessboard-field-selected_white_color: #fff387;
+  --chessboard-field-silent_move_black_color: #8cd775;
+  --chessboard-field-silent_move_white_color: #afff98;
+  --chessboard-field-attack_move_black_color: #df5851;
+  --chessboard-field-attack_move_white_color: #ff7b74;
+  --move_history-bg_color: #202022;
+  --chessboard-board-radius: 2.083vmin;
+  --button-border-color: #847141;
+  --button-text-color: #d7b55b;
+  --button-border-selected_color: #a98e4a;
+  --button-background-selected_color: #332e21;
+  --button-border-active_color: #d7b55b40;
+  --move_history_button-color: #af86d0;
+  --move_history_button-active_color: #af86d040;
+  --move_history_button-background-selected_color: #2d253a;
+  --game_info-color: #fff;
+}
+
+table.chessboard {
+  display: inline-block;
+  margin: 25px auto 0 auto;
+  border-collapse: collapse;
+  border-radius: var(--chessboard-board-radius);
+  overflow: hidden;
+}
+
+table.chessboard td {
+  width: 10vmin;
+  height: 10vmin;
+  vertical-align: top;
+  font-family: var(--main-font-family);
+  font-style: normal;
+  font-weight: 600;
+  font-size: 2.5vmin;
+}
+
+table.chessboard tr:nth-last-child(1) td {
+  vertical-align: bottom;
+}
+
+table.chessboard tr td {
+  background-color: var(--chessboard-field-white_color);
+  color: var(--chessboard-field-black_color);
+}
+
+table.chessboard tr:nth-child(odd) td:nth-child(even) {
+  background-color: var(--chessboard-field-black_color);
+  color: var(--chessboard-field-white_color);
+}
+
+table.chessboard tr:nth-child(even) td:nth-child(odd) {
+  background-color: var(--chessboard-field-black_color);
+  color: var(--chessboard-field-white_color);
+}
+
+table.chessboard tr td.chessboard-field-selected {
+  background-color: var(--chessboard-field-selected_white_color);
+  color: var(--chessboard-field-selected_black_color);
+}
+
+table.chessboard tr:nth-child(odd) td:nth-child(even).chessboard-field-selected {
+  background-color: var(--chessboard-field-selected_black_color);
+  color: var(--chessboard-field-selected_white_color);
+}
+
+table.chessboard tr:nth-child(even) td:nth-child(odd).chessboard-field-selected {
+  background-color: var(--chessboard-field-selected_black_color);
+  color: var(--chessboard-field-selected_white_color);
+}
+
+table.chessboard tr td.chessboard-field-silent_move {
+  background-color: var(--chessboard-field-silent_move_white_color);
+  color: var(--chessboard-field-silent_move_black_color);
+}
+
+table.chessboard tr:nth-child(odd) td:nth-child(even).chessboard-field-silent_move {
+  background-color: var(--chessboard-field-silent_move_black_color);
+  color: var(--chessboard-field-silent_move_white_color);
+}
+
+table.chessboard tr:nth-child(even) td:nth-child(odd).chessboard-field-silent_move {
+  background-color: var(--chessboard-field-silent_move_black_color);
+  color: var(--chessboard-field-silent_move_white_color);
+}
+
+table.chessboard tr td.chessboard-field-attack_move {
+  background-color: var(--chessboard-field-attack_move_white_color);
+  color: var(--chessboard-field-attack_move_black_color);
+}
+
+table.chessboard tr:nth-child(odd) td:nth-child(even).chessboard-field-attack_move {
+  background-color: var(--chessboard-field-attack_move_black_color);
+  color: var(--chessboard-field-attack_move_white_color);
+}
+
+table.chessboard tr:nth-child(even) td:nth-child(odd).chessboard-field-attack_move {
+  background-color: var(--chessboard-field-attack_move_black_color);
+  color: var(--chessboard-field-attack_move_white_color);
+}
+
+.chessboard-black_pawn {
+  background: url(../images/black_pawn.png) center no-repeat;
+  background-size: 8vmin;
+  transition: background-size 0.1s;
+}
+
+.chessboard-white_pawn {
+  background: url(../images/white_pawn.png) center no-repeat;
+  background-size: 8vmin;
+  transition: background-size 0.1s;
+}
+
+.chessboard-black_queen {
+  background: url(../images/black_queen.png) center no-repeat;
+  background-size: 8vmin;
+  transition: background-size 0.1s;
+}
+
+.chessboard-white_queen {
+  background: url(../images/white_queen.png) center no-repeat;
+  background-size: 8vmin;
+  transition: background-size 0.1s;
+}
+
+.chessboard-selectable_field:hover {
+  cursor: pointer;
+  background-size: 8.4vmin;
+}
+
+.chessboard_text-align-left_top {
+  display: block;
+  margin-left: 0.52vmin;
+  text-align: left;
+  height: 3.02vmin;
+  line-height: 3.02vmin;
+}
+
+.chessboard_text-a1_field-align {
+  margin-top: calc(100% - 3.02vmin - 3.02vmin - 0.2vmin);
+}
+
+.chessboard_text-align-right_bottom {
+  display: block;
+  margin-right: 0.52vmin;
+  margin-bottom: 0.2vmin;
+  text-align: right;
+  height: 3.02vmin;
+  line-height: 3.02vmin;
+}
+
+.chessboard-interface {
+  display: inline-flex;
+  flex-flow: column;
+  vertical-align: top;
+  width: calc(100% - 80vmin - 25px);
+  height: 80vmin;
+  max-width: 80vmin;
+  margin: 25px 0 0 25px;
+}
+
+.move_history {
+  display: inline-flex;
+  flex-flow: column;
+  min-height: 250px;
+  border: 2px solid var(--block-border-inactive_color);
+  border-radius: var(--chessboard-board-radius);
+  color: var(--block-description-selected_color);
+  background-color: var(--move_history-bg_color);
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.move_history:hover {
+  color: var(--block-description-active_color);
+  border-color: var(--block-border-selected_color);
+}
+
+#move_history-text {
+  font-family: var(--main-font-family);
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  text-align: left;
+  margin: 16px;
+  outline: none;
+  resize: none;
+  height: 170px;
+  border: none;
+  background-color: inherit;
+  color: inherit;
+}
+
+#game_info-text {
+  font-family: var(--main-font-family);
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  text-align: left;
+  margin-top: 25px;
+  color: var(--game_info-color);
+}
+
+.move_history-buttons {
+  display: flex;
+  margin-top: auto;
+}
+
+#button-show {
+  margin: 0 16px 16px 16px;
+  width: 118px;
+  height: 60px;
+  padding: 0;
+  color: var(--move_history_button-color);
+  border-width: 2px;
+  border-color: var(--block-border-selected_color);
+}
+
+#button-copy {
+  margin: 0 16px 16px auto;
+  display: inline-flex;
+  width: 60px;
+  height: 60px;
+  padding: 0;
+  border-width: 2px;
+  border-color: var(--block-border-selected_color);
+}
+
+#button-show:hover,
+#button-copy:hover {
+  border-color: var(--block-border-active_color);
+  background-color: var(--move_history_button-background-selected_color);
+}
+
+#button-show:disabled,
+#button-show:active,
+#button-copy:disabled,
+#button-copy:active {
+  color: var(--move_history_button-active_color);
+  border-color: var(--move_history_button-active_color);
+  background-color: var(--move_history-bg_color);
+}
+
+#button-copy::before {
+  content: url(../images/copy.svg);
+  display: inline-flex;
+  align-self: center;
+  margin: 0 auto;
+  transition: opacity 0.05s;
+}
+
+.interface-row {
+  display: inline-block;
+  width: 100%;
+  height: fit-content;
+  text-align: left;
+}
+
+.interface-bottom {
+  margin-top: auto;
+}
+
+button {
+  cursor: pointer;
+  display: inline-block;
+  margin-top: 25px;
+  text-align: center;
+  width: fit-content;
+  padding: 0 20px;
+  height: 66px;
+  font-family: var(--main-font-family);
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  border: 3px solid var(--button-border-color);
+  border-radius: var(--chessboard-board-radius);
+  color: var(--button-text-color);
+  background-color: var(--move_history-bg_color);
+  transition: color 0.05s, border-color 0.05s, background-color 0.05s;
+}
+
+button:hover {
+  border-color: var(--button-border-selected_color);
+  background-color: var(--button-background-selected_color);
+}
+
+button:disabled {
+  cursor: default;
+}
+
+button:disabled,
+button:active {
+  color: var(--button-border-active_color);
+  border-color: var(--button-border-active_color);
+  background-color: var(--move_history-bg_color);
+}
+
+#button-example,
+#button-start {
+  min-width: 140px;
+  width: inherit;
+  max-width: 186px;
+}
+
+#button-example,
+#button-cancel {
+  margin-right: 25px;
+}
+
+#button-cancel {
+  width: 66px;
+  height: 66px;
+  padding: 0;
+  text-align: left;
+  vertical-align: top;
+  display: inline-flex;
+}
+
+#button-cancel::before {
+  content: url(../images/cancel.svg);
+  display: inline-flex;
+  align-self: center;
+  margin: 0 auto;
+  transition: opacity 0.05s;
+}
+
+#button-copy:disabled::before,
+#button-copy:active::before,
+#button-cancel:disabled::before,
+#button-cancel:active::before {
+  opacity: 25%;
+}
