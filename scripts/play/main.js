@@ -3,11 +3,16 @@ const chessboardModel = new ChessboardModel(rules);
 const chessboardView = new ChessboardView();
 const chessboardController = new ChessboardController(chessboardModel, chessboardView);
 
+document.getElementById("button-show").onclick = () => clickOnShowButton(chessboardController);
 document.getElementById("button-copy").onclick = () => clickOnCopyButton(chessboardController);
 document.getElementById("button-example").onclick = () => clickOnExampleButton(chessboardController);
 document.getElementById("button-start").onclick = () => clickOnStartButton(chessboardController);
 document.getElementById("button-cancel").onclick = () => clickOnCancelButton(chessboardController);
 document.getElementById("button-end").onclick = () => clickOnEndButton(chessboardController);
+
+function clickOnShowButton(chessboardController) {
+  chessboardController.clickOnShowButton();
+}
 
 function clickOnCopyButton(chessboardController) {
   chessboardController.copyMoveHistoryToClipboard();

@@ -220,6 +220,54 @@ class ChessboardController {
     }
   }
 
+  clickOnShowButton() {
+    const historyText = this.chessboardView.getHistoryText();
+    this.setChessboard("-p-p-p-pp-p-p-p--p-p-p-p----------------P-P-P-P--P-P-P-PP-P-P-P-");
+    let word = "";
+    for (let i = 0; i < historyText.length; ++i) {
+      const char = historyText[i];
+      if (char !== " " && char !== "\t" && char !== "\n") word += char;
+      else {
+        if (word === "") continue;
+        const processed = this.#handleWord(word);
+        if (!processed) return;
+        word = "";
+      }
+    }
+    if (word !== "") this.#handleWord(word);
+  }
+
+  /**
+   * @param {string} word
+   * @returns true if the word was processed, false if error occurred
+   */
+  #handleWord(word) {
+    // examples: a2-F4:d5 | H8:f1
+    const canWordBeAMove = /[a-hA-H][1-8]([-:][a-hA-H][1-8]){1,}$/.test(word);
+    if (!canWordBeAMove) {
+      this.#showErrorWord(word);
+      return false;
+    }
+
+    for (let i = 0; i < word.length; i += 3) {
+      const column = word[i].toLowerCase().charCodeAt(0) - "a".charCodeAt(0);
+      const row = 7 - (word.charCodeAt(i + 1) - "1".charCodeAt(0));
+
+      if (!this.chessboardView.isSelectableField(row, column)) {
+        this.#showErrorWord(word);
+        return false;
+      }
+      this.clickOnFieldEvent(row, column);
+    }
+    this.clickOnEndButton();
+
+    return true;
+  }
+
+  #showErrorWord(word) {
+    this.chessboardView.setGameInfoText(`Ошибка хода: ${word}`);
+  }
+
   copyMoveHistoryToClipboard() {
     const moveHistory = this.chessboardModel.moveHistory.convertToString();
     navigator.clipboard.writeText(moveHistory);

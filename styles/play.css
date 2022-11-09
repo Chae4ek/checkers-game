@@ -14,8 +14,9 @@
   --button-border-selected_color: #a98e4a;
   --button-background-selected_color: #332e21;
   --button-border-active_color: #d7b55b40;
-  --copy_button-border-active_color: #af86d040;
-  --copy_button-background-selected_color: #2d253a;
+  --move_history_button-color: #af86d0;
+  --move_history_button-active_color: #af86d040;
+  --move_history_button-background-selected_color: #2d253a;
   --game_info-color: #fff;
 }
 
@@ -202,30 +203,43 @@ table.chessboard tr:nth-child(even) td:nth-child(odd).chessboard-field-attack_mo
   color: var(--game_info-color);
 }
 
-#button-copy {
-  align-self: flex-end;
-  margin: auto 16px 16px 16px;
+.move_history-buttons {
+  display: flex;
+  margin-top: auto;
 }
 
-#button-copy {
-  width: 60px;
+#button-show {
+  margin: 0 16px 16px 16px;
+  width: 118px;
   height: 60px;
   padding: 0;
-  text-align: left;
-  vertical-align: top;
-  display: inline-flex;
+  color: var(--move_history_button-color);
   border-width: 2px;
   border-color: var(--block-border-selected_color);
 }
 
-#button-copy:hover {
-  border-color: var(--block-border-active_color);
-  background-color: var(--copy_button-background-selected_color);
+#button-copy {
+  margin: 0 16px 16px auto;
+  display: inline-flex;
+  width: 60px;
+  height: 60px;
+  padding: 0;
+  border-width: 2px;
+  border-color: var(--block-border-selected_color);
 }
 
+#button-show:hover,
+#button-copy:hover {
+  border-color: var(--block-border-active_color);
+  background-color: var(--move_history_button-background-selected_color);
+}
+
+#button-show:disabled,
+#button-show:active,
 #button-copy:disabled,
 #button-copy:active {
-  border-color: var(--copy_button-border-active_color);
+  color: var(--move_history_button-active_color);
+  border-color: var(--move_history_button-active_color);
   background-color: var(--move_history-bg_color);
 }
 

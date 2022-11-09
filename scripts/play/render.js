@@ -23,6 +23,10 @@ class ChessboardView {
     }
   }
 
+  getHistoryText() {
+    return this.moveHistoryText.value;
+  }
+
   setHistoryText(text) {
     this.moveHistoryText.value = text;
   }
