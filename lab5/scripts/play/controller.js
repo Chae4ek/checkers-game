@@ -259,7 +259,7 @@ class ChessboardController {
       }
       this.clickOnFieldEvent(row, column);
     }
-    this.clickOnEndButton();
+    if (this.chessboardView.isEndButtonActive()) this.clickOnEndButton();
 
     return true;
   }
