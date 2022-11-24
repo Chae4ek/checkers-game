@@ -1,4 +1,7 @@
-class ChessboardController {
+import { MoveType, PieceColor, Pawn } from "./engine";
+import { FieldType } from "./render";
+
+export class ChessboardController {
   /**
    * @param {ChessboardModel} chessboardModel
    * @param {ChessboardView} chessboardView

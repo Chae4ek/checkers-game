@@ -1,4 +1,4 @@
-class Rules {
+export class Rules {
   /**
    * @param {boolean} canAttackMoveBackward whether a simple piece can make an attacking move backwards
    * @param {boolean} isAttackMandatory whether an attack move is mandatory
@@ -15,7 +15,7 @@ class Rules {
   }
 }
 
-class ChessboardModel {
+export class ChessboardModel {
   /**
    * @param {Rules} rules
    */
@@ -199,7 +199,7 @@ class ChessboardModel {
   }
 }
 
-class Field {
+export class Field {
   /**
    * @param {number} row
    * @param {number} column
@@ -213,10 +213,10 @@ class Field {
   }
 }
 
-const MoveType = { SILENT: 0, ATTACK: 1 };
-const PieceColor = { BLACK: 0, WHITE: 1 };
+export const MoveType = { SILENT: 0, ATTACK: 1 };
+export const PieceColor = { BLACK: 0, WHITE: 1 };
 
-class Piece {
+export class Piece {
   /**
    * @param {Field} field
    * @param {PieceColor} color
@@ -231,13 +231,13 @@ class Piece {
   }
 }
 
-function addAllowedMove(allowedMoves, moveType, move) {
+const addAllowedMove = (allowedMoves, moveType, move) => {
   let list = allowedMoves.get(moveType);
   if (list === undefined) allowedMoves.set(moveType, (list = []));
   list.push(move);
-}
+};
 
-class Pawn extends Piece {
+export class Pawn extends Piece {
   getPossibleMoves() {
     const allowedMoves = new Map();
     const colorCoeff = this.color === PieceColor.BLACK ? 1 : -1;
@@ -282,7 +282,7 @@ class Pawn extends Piece {
   }
 }
 
-class Queen extends Piece {
+export class Queen extends Piece {
   getPossibleMoves() {
     const allowedMoves = new Map();
     this.#tryRayCastAndAddMoves(1, 1, allowedMoves);
@@ -321,7 +321,7 @@ class Queen extends Piece {
   }
 }
 
-class Move {
+export class Move {
   /**
    * @param {Field} fromField
    * @param {Field} toField
@@ -335,9 +335,9 @@ class Move {
   }
 }
 
-class MoveHistory {
+export class MoveHistory {
   constructor() {
-    this.moves = new Array();
+    this.moves = [];
   }
 
   /**

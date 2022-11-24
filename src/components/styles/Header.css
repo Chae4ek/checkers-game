@@ -1,0 +1,81 @@
+:root {
+  --main-transparent-bg-color: #242426d8;
+  --title-font-family: "Fredoka One", cursive;
+  --title-color: #fff;
+  --navigation-active_color: #fff2bd;
+  --navigation-selected_color: #504d44;
+  --navigation-inactive_color: #7c7763;
+}
+
+header {
+  display: inline-block;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 80px;
+  background-color: var(--main-transparent-bg-color);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+}
+
+.header-left {
+  display: inline-block;
+  margin: 16px 0 16px 25px;
+  font-family: var(--title-font-family);
+  font-style: normal;
+  font-weight: normal;
+  font-size: 40px;
+  color: var(--title-color);
+}
+
+.header-right {
+  display: inline-block;
+  position: absolute;
+  margin: 25.5px 0 25.5px 0;
+  width: 100%;
+  right: 0;
+  text-align: center;
+}
+
+.header-link {
+  display: inline-block;
+  font-family: var(--main-font-family);
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  margin: 0 45px 0 45px;
+  text-decoration: none;
+  color: var(--navigation-active_color);
+  padding-bottom: 2px;
+  background: 50% 100% / 0 2px linear-gradient(var(--navigation-active_color), var(--navigation-active_color)) no-repeat;
+  transition: background-size 0.2s, color 0.1s;
+}
+
+.header-link-current_page {
+  color: var(--navigation-inactive_color);
+  background: 50% 100% / 0 2px linear-gradient(var(--navigation-inactive_color), var(--navigation-inactive_color))
+    no-repeat;
+}
+
+.header-link:hover {
+  background-size: 100% 2px;
+  background-origin: auto 40%;
+}
+
+.header-link:active {
+  color: var(--navigation-selected_color);
+  background: 50% 100% / 0 2px linear-gradient(var(--navigation-selected_color), var(--navigation-selected_color))
+    no-repeat;
+}
+
+@media screen and (max-width: 1080px) {
+  .header-right {
+    text-align: right;
+    margin-right: 16px;
+  }
+  .header-link {
+    margin: 0 2% 0 2%;
+  }
+}

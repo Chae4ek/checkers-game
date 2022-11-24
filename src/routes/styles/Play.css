@@ -7,13 +7,13 @@
   --chessboard-field-silent_move_white_color: #afff98;
   --chessboard-field-attack_move_black_color: #df5851;
   --chessboard-field-attack_move_white_color: #ff7b74;
-  --move_history-bg_color: #202022;
   --chessboard-board-radius: 2.083vmin;
   --button-border-color: #847141;
-  --button-text-color: #d7b55b;
   --button-border-selected_color: #a98e4a;
-  --button-background-selected_color: #332e21;
   --button-border-active_color: #d7b55b40;
+  --button-text-color: #d7b55b;
+  --button-background-selected_color: #332e21;
+  --move_history-bg_color: #202022;
   --move_history_button-color: #af86d0;
   --move_history_button-active_color: #af86d040;
   --move_history_button-background-selected_color: #2d253a;
@@ -103,25 +103,25 @@ table.chessboard tr:nth-child(even) td:nth-child(odd).chessboard-field-attack_mo
 }
 
 .chessboard-black_pawn {
-  background: url(../images/black_pawn.png) center no-repeat;
+  background: url(../../static/images/black_pawn.png) center no-repeat;
   background-size: 8vmin;
   transition: background-size 0.1s;
 }
 
 .chessboard-white_pawn {
-  background: url(../images/white_pawn.png) center no-repeat;
+  background: url(../../static/images/white_pawn.png) center no-repeat;
   background-size: 8vmin;
   transition: background-size 0.1s;
 }
 
 .chessboard-black_queen {
-  background: url(../images/black_queen.png) center no-repeat;
+  background: url(../../static/images/black_queen.png) center no-repeat;
   background-size: 8vmin;
   transition: background-size 0.1s;
 }
 
 .chessboard-white_queen {
-  background: url(../images/white_queen.png) center no-repeat;
+  background: url(../../static/images/white_queen.png) center no-repeat;
   background-size: 8vmin;
   transition: background-size 0.1s;
 }
@@ -244,7 +244,7 @@ table.chessboard tr:nth-child(even) td:nth-child(odd).chessboard-field-attack_mo
 }
 
 #button-copy::before {
-  content: url(../images/copy.svg);
+  content: url(../../static/images/copy.svg);
   display: inline-flex;
   align-self: center;
   margin: 0 auto;
@@ -319,7 +319,7 @@ button:active {
 }
 
 #button-cancel::before {
-  content: url(../images/cancel.svg);
+  content: url(../../static/images/cancel.svg);
   display: inline-flex;
   align-self: center;
   margin: 0 auto;
@@ -331,4 +331,30 @@ button:active {
 #button-cancel:disabled::before,
 #button-cancel:active::before {
   opacity: 25%;
+}
+
+@media screen and (max-width: 1080px) {
+  .chessboard-interface {
+    flex-flow: wrap;
+    align-content: flex-start;
+    margin: 0 auto 0 auto;
+    width: 80vmin;
+    max-width: unset;
+  }
+  .move_history {
+    margin-top: 25px;
+    width: 100%;
+    order: 2;
+  }
+  #game_info-text {
+    width: 100%;
+    order: 1;
+  }
+  .interface-row {
+    width: fit-content;
+  }
+  .interface-bottom {
+    margin-top: 0;
+    margin-left: auto;
+  }
 }

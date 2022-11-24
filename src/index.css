@@ -1,0 +1,35 @@
+:root {
+  --main-bg-color: #242426;
+  --main-font-family: "Exo 2", sans-serif;
+  --block-description-active_color: #c69de7;
+  --block-description-selected_color: #8662a3;
+  --block-description-inactive_color: #614e7d;
+  --block-border-active_color: #8c68aa;
+  --block-border-selected_color: #63457c;
+  --block-border-inactive_color: #493565;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+::selection {
+  color: #fff;
+  background: #5e5effd7;
+}
+
+.non-selectable {
+  cursor: default;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+html,
+body,
+#root {
+  background-color: var(--main-bg-color);
+  display: table;
+  height: 100%;
+  width: 100%;
+}

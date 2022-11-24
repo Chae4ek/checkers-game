@@ -1,4 +1,4 @@
-class ChessboardView {
+export class ChessboardView {
   constructor() {
     this.cells = Array.from(document.getElementsByClassName("chessboard")[0].firstElementChild.children).map((x) =>
       Array.from(x.children)
@@ -124,4 +124,4 @@ class ChessboardView {
   }
 }
 
-const FieldType = { NONE: 0, SELECTED: 1, SILENT_MOVE: 2, ATTACK_MOVE: 3 };
+export const FieldType = { NONE: 0, SELECTED: 1, SILENT_MOVE: 2, ATTACK_MOVE: 3 };
