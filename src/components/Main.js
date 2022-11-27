@@ -1,9 +1,9 @@
-import "./styles/Main.css";
+import styles from "./styles/Main.module.scss";
 
 export const Main = ({ children }) => {
   return (
     <main>
-      <div className="main-content">{children}</div>
+      <div className={styles.main__content}>{children}</div>
     </main>
   );
 };

@@ -19,12 +19,6 @@
   background: #5e5effd7;
 }
 
-.non-selectable {
-  cursor: default;
-  user-select: none;
-  -webkit-user-select: none;
-}
-
 html,
 body,
 #root {

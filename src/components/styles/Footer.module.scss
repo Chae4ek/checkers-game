@@ -15,7 +15,7 @@ footer {
   background: var(--footer-color);
 }
 
-.footer-title {
+.footer__title {
   font-family: var(--main-font-family);
   font-style: italic;
   font-weight: bold;
@@ -29,7 +29,7 @@ footer {
   border-bottom-width: 2px;
 }
 
-.footer-rights {
+.footer__rights {
   font-family: var(--main-font-family);
   font-style: normal;
   font-weight: normal;
@@ -40,16 +40,14 @@ footer {
   width: fit-content;
 }
 
-.footer-link {
+.footer__link {
   text-decoration: none;
   color: var(--footer-link-color);
-}
-
-.footer-link:hover {
-  text-decoration-line: underline;
-}
-
-.footer-link:active {
-  text-decoration-line: none;
-  color: var(--footer-title-color);
+  &:hover {
+    text-decoration-line: underline;
+  }
+  &:active {
+    text-decoration-line: none;
+    color: var(--footer-title-color);
+  }
 }

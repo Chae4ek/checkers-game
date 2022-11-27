@@ -1,5 +1,7 @@
-.card-active,
-.card-inactive {
+@import "./All.module.scss";
+
+.card__active,
+.card__inactive {
   margin-top: 50px;
   padding-bottom: 25px;
   display: block;
@@ -11,28 +13,28 @@
   overflow: hidden;
 }
 
-.card-active {
+.card__active {
   color: var(--block-description-active_color);
   border-color: var(--block-border-active_color);
 }
 
-.card-inactive:hover {
+.card__inactive:hover {
   color: var(--block-description-selected_color);
   border-color: var(--block-border-selected_color);
 }
 
-.card-active:hover .card-inactive-image,
-.card-inactive:hover .card-inactive-image {
+.card__active:hover .card__inactive__image,
+.card__inactive:hover .card__inactive__image {
   transform: scale(1.07);
 }
 
-.card-inactive-image_border {
+.card__inactive__image_border {
   overflow: hidden;
   width: 101%;
   height: 240px;
 }
 
-.card-inactive-image {
+.card__inactive__image {
   display: block;
   text-align: center;
   width: 100%;
@@ -47,11 +49,11 @@
   transition: transform 0.2s, opacity 0.15s;
 }
 
-.card-inactive-image:hover {
+.card__inactive__image:hover {
   opacity: 70%;
 }
 
-.card-inactive-title {
+.card__inactive__title {
   font-family: var(--main-font-family);
   font-style: normal;
   font-weight: 800;
@@ -60,7 +62,7 @@
   margin: 25px 25px 12px 25px;
 }
 
-.card-inactive-subtitle {
+.card__inactive__subtitle {
   font-family: var(--main-font-family);
   font-style: normal;
   font-weight: bold;
@@ -69,7 +71,7 @@
   margin: 40px 25px 12px 25px;
 }
 
-.card-inactive-description {
+.card__inactive__description {
   font-family: var(--main-font-family);
   font-style: normal;
   font-weight: normal;
@@ -77,27 +79,25 @@
   margin: 0 25px 12px 25px;
 }
 
-.card-inactive-list {
+.card__inactive__list {
   font-family: var(--main-font-family);
   font-style: normal;
   font-weight: normal;
   font-size: 20px;
   margin: 0 25px 12px 25px;
   text-indent: 10px;
+  > li {
+    margin-bottom: 12px;
+    &::marker {
+      content: ">";
+    }
+  }
 }
 
-.card-inactive-list > li {
-  margin-bottom: 12px;
-}
-
-.card-inactive-list > li::marker {
-  content: ">";
-}
-
-.text-style-italic {
+.text__style__italic {
   font-style: italic;
 }
 
-.text-style-bold {
+.text__style__bold {
   font-weight: bold;
 }

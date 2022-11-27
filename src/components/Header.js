@@ -1,22 +1,45 @@
-import "./styles/Header.css";
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import styles from "./styles/Header.module.scss";
 
-export const Header = ({ currentPage }) => {
-  const pageClass = "header-link";
-  const currentPageClass = "header-link header-link-current_page";
+export const Header = () => {
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const setPage = (page, title) => {
+    document.title = title;
+    setCurrentPage(page);
+  };
+
+  const location = useLocation();
+  useEffect(() => {
+    const trySetPage = (page, title, pattern) => {
+      if (pattern.test(location.pathname)) setPage(page, title);
+    };
+    setPage(0, "Checkers Game");
+    trySetPage(1, "Checkers Game | About", /^[/]about/);
+    trySetPage(2, "Checkers Game | Play", /^[/]play/);
+    trySetPage(3, "Checkers Game | Rules", /^[/]rules/);
+  }, [location]);
+
+  const getStyle = (page) => {
+    let style = styles.header__link;
+    if (currentPage === page) style += ` ${styles.header__link__current_page}`;
+    return style;
+  };
 
   return (
-    <header className="non-selectable">
-      <h1 className="header-left">Checkers Game</h1>
-      <nav className="header-right">
-        <a className={currentPage === 1 ? currentPageClass : pageClass} href="/#">
+    <header className={styles.non_selectable}>
+      <h1 className={styles.header__left}>Checkers Game</h1>
+      <nav className={styles.header__right}>
+        <Link className={getStyle(1)} to="/about">
           About
-        </a>
-        <a className={currentPage === 2 ? currentPageClass : pageClass} href="play#">
+        </Link>
+        <Link className={getStyle(2)} to="/play">
           Play
-        </a>
-        <a className={currentPage === 3 ? currentPageClass : pageClass} href="rules#">
+        </Link>
+        <Link className={getStyle(3)} to="/rules">
           Rules
-        </a>
+        </Link>
       </nav>
     </header>
   );

@@ -1,12 +1,14 @@
+import styles from "../../routes/styles/Play.module.scss";
+
 export class ChessboardView {
   constructor() {
-    this.cells = Array.from(document.getElementsByClassName("chessboard")[0].firstElementChild.children).map((x) =>
+    this.cells = Array.from(document.getElementsByClassName(styles.chessboard)[0].firstElementChild.children).map((x) =>
       Array.from(x.children)
     );
-    this.moveHistoryText = document.getElementById("move_history-text");
-    this.gameInfoText = document.getElementById("game_info-text");
-    this.buttonCancel = document.getElementById("button-cancel");
-    this.buttonEnd = document.getElementById("button-end");
+    this.moveHistoryText = document.getElementById(styles["move_history__text"]);
+    this.gameInfoText = document.getElementById(styles["game_info__text"]);
+    this.buttonCancel = document.getElementById(styles["button__cancel"]);
+    this.buttonEnd = document.getElementById(styles["button__end"]);
 
     this.setHistoryText(null);
     this.toggleMoveButtons(false);
@@ -62,22 +64,22 @@ export class ChessboardView {
   setFieldType(row, column, fieldType) {
     const classList = this.cells[row][column].classList;
     classList.remove(
-      "chessboard-field-selected",
-      "chessboard-field-silent_move",
-      "chessboard-field-attack_move",
-      "chessboard-selectable_field"
+      styles.chessboard__field__selected,
+      styles.chessboard__field__silent_move,
+      styles.chessboard__field__attack_move,
+      styles.chessboard__selectable_field
     );
     switch (fieldType) {
       case FieldType.NONE:
         break;
       case FieldType.SELECTED:
-        classList.add("chessboard-field-selected", "chessboard-selectable_field");
+        classList.add(styles.chessboard__field__selected, styles.chessboard__selectable_field);
         break;
       case FieldType.SILENT_MOVE:
-        classList.add("chessboard-field-silent_move", "chessboard-selectable_field");
+        classList.add(styles.chessboard__field__silent_move, styles.chessboard__selectable_field);
         break;
       case FieldType.ATTACK_MOVE:
-        classList.add("chessboard-field-attack_move", "chessboard-selectable_field");
+        classList.add(styles.chessboard__field__attack_move, styles.chessboard__selectable_field);
         break;
       default:
         throw new Error(`Unknown field type: ${fieldType}`);
@@ -85,42 +87,42 @@ export class ChessboardView {
   }
 
   isSelectableField(row, column) {
-    return this.cells[row][column].classList.contains("chessboard-selectable_field");
+    return this.cells[row][column].classList.contains(styles.chessboard__selectable_field);
   }
 
   setSelectableField(row, column, isSelectable) {
-    if (isSelectable) this.cells[row][column].classList.add("chessboard-selectable_field");
-    else this.cells[row][column].classList.remove("chessboard-selectable_field");
+    if (isSelectable) this.cells[row][column].classList.add(styles.chessboard__selectable_field);
+    else this.cells[row][column].classList.remove(styles.chessboard__selectable_field);
   }
 
   setEmptyField(row, column) {
     const classList = this.cells[row][column].classList;
     classList.remove(
-      "chessboard-white_pawn",
-      "chessboard-black_pawn",
-      "chessboard-white_queen",
-      "chessboard-black_queen"
+      styles.chessboard__white_pawn,
+      styles.chessboard__black_pawn,
+      styles.chessboard__white_queen,
+      styles.chessboard__black_queen
     );
   }
 
   setWhitePawn(row, column) {
     this.setEmptyField(row, column);
-    this.cells[row][column].classList.add("chessboard-white_pawn");
+    this.cells[row][column].classList.add(styles.chessboard__white_pawn);
   }
 
   setBlackPawn(row, column) {
     this.setEmptyField(row, column);
-    this.cells[row][column].classList.add("chessboard-black_pawn");
+    this.cells[row][column].classList.add(styles.chessboard__black_pawn);
   }
 
   setWhiteQueen(row, column) {
     this.setEmptyField(row, column);
-    this.cells[row][column].classList.add("chessboard-white_queen");
+    this.cells[row][column].classList.add(styles.chessboard__white_queen);
   }
 
   setBlackQueen(row, column) {
     this.setEmptyField(row, column);
-    this.cells[row][column].classList.add("chessboard-black_queen");
+    this.cells[row][column].classList.add(styles.chessboard__black_queen);
   }
 }
 

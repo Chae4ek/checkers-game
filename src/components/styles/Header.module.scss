@@ -1,3 +1,5 @@
+@import "./All.module.scss";
+
 :root {
   --main-transparent-bg-color: #242426d8;
   --title-font-family: "Fredoka One", cursive;
@@ -18,7 +20,7 @@ header {
   z-index: 100;
 }
 
-.header-left {
+.header__left {
   display: inline-block;
   margin: 16px 0 16px 25px;
   font-family: var(--title-font-family);
@@ -28,7 +30,7 @@ header {
   color: var(--title-color);
 }
 
-.header-right {
+.header__right {
   display: inline-block;
   position: absolute;
   margin: 25.5px 0 25.5px 0;
@@ -37,7 +39,7 @@ header {
   text-align: center;
 }
 
-.header-link {
+.header__link {
   display: inline-block;
   font-family: var(--main-font-family);
   font-style: normal;
@@ -51,31 +53,30 @@ header {
   padding-bottom: 2px;
   background: 50% 100% / 0 2px linear-gradient(var(--navigation-active_color), var(--navigation-active_color)) no-repeat;
   transition: background-size 0.2s, color 0.1s;
+  &:hover {
+    background-size: 100% 2px;
+    background-origin: auto 40%;
+  }
+  &:active {
+    color: var(--navigation-selected_color);
+    background: 50% 100% / 0 2px linear-gradient(var(--navigation-selected_color), var(--navigation-selected_color))
+      no-repeat;
+  }
 }
 
-.header-link-current_page {
+.header__link__current_page {
   color: var(--navigation-inactive_color);
   background: 50% 100% / 0 2px linear-gradient(var(--navigation-inactive_color), var(--navigation-inactive_color))
     no-repeat;
 }
 
-.header-link:hover {
-  background-size: 100% 2px;
-  background-origin: auto 40%;
-}
-
-.header-link:active {
-  color: var(--navigation-selected_color);
-  background: 50% 100% / 0 2px linear-gradient(var(--navigation-selected_color), var(--navigation-selected_color))
-    no-repeat;
-}
-
 @media screen and (max-width: 1080px) {
-  .header-right {
+  .header__right {
     text-align: right;
     margin-right: 16px;
   }
-  .header-link {
+
+  .header__link {
     margin: 0 2% 0 2%;
   }
 }

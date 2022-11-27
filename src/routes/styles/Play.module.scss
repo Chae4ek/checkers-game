@@ -1,3 +1,5 @@
+@import "../../components/styles/All.module.scss";
+
 :root {
   --chessboard-field-black_color: #9faf88;
   --chessboard-field-white_color: #eeeed5;
@@ -26,112 +28,100 @@ table.chessboard {
   border-collapse: collapse;
   border-radius: var(--chessboard-board-radius);
   overflow: hidden;
+  td {
+    width: 10vmin;
+    height: 10vmin;
+    vertical-align: top;
+    font-family: var(--main-font-family);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 2.5vmin;
+  }
+  tr {
+    &:nth-last-child(1) td {
+      vertical-align: bottom;
+    }
+    &:nth-child(odd) td:nth-child(even) {
+      background-color: var(--chessboard-field-black_color);
+      color: var(--chessboard-field-white_color);
+      &.chessboard__field__selected {
+        background-color: var(--chessboard-field-selected_black_color);
+        color: var(--chessboard-field-selected_white_color);
+      }
+      &.chessboard__field__silent_move {
+        background-color: var(--chessboard-field-silent_move_black_color);
+        color: var(--chessboard-field-silent_move_white_color);
+      }
+      &.chessboard__field__attack_move {
+        background-color: var(--chessboard-field-attack_move_black_color);
+        color: var(--chessboard-field-attack_move_white_color);
+      }
+    }
+    &:nth-child(even) td:nth-child(odd) {
+      background-color: var(--chessboard-field-black_color);
+      color: var(--chessboard-field-white_color);
+      &.chessboard__field__selected {
+        background-color: var(--chessboard-field-selected_black_color);
+        color: var(--chessboard-field-selected_white_color);
+      }
+      &.chessboard__field__silent_move {
+        background-color: var(--chessboard-field-silent_move_black_color);
+        color: var(--chessboard-field-silent_move_white_color);
+      }
+      &.chessboard__field__attack_move {
+        background-color: var(--chessboard-field-attack_move_black_color);
+        color: var(--chessboard-field-attack_move_white_color);
+      }
+    }
+    td {
+      background-color: var(--chessboard-field-white_color);
+      color: var(--chessboard-field-black_color);
+      &.chessboard__field__selected {
+        background-color: var(--chessboard-field-selected_white_color);
+        color: var(--chessboard-field-selected_black_color);
+      }
+      &.chessboard__field__silent_move {
+        background-color: var(--chessboard-field-silent_move_white_color);
+        color: var(--chessboard-field-silent_move_black_color);
+      }
+      &.chessboard__field__attack_move {
+        background-color: var(--chessboard-field-attack_move_white_color);
+        color: var(--chessboard-field-attack_move_black_color);
+      }
+    }
+  }
 }
 
-table.chessboard td {
-  width: 10vmin;
-  height: 10vmin;
-  vertical-align: top;
-  font-family: var(--main-font-family);
-  font-style: normal;
-  font-weight: 600;
-  font-size: 2.5vmin;
-}
-
-table.chessboard tr:nth-last-child(1) td {
-  vertical-align: bottom;
-}
-
-table.chessboard tr td {
-  background-color: var(--chessboard-field-white_color);
-  color: var(--chessboard-field-black_color);
-}
-
-table.chessboard tr:nth-child(odd) td:nth-child(even) {
-  background-color: var(--chessboard-field-black_color);
-  color: var(--chessboard-field-white_color);
-}
-
-table.chessboard tr:nth-child(even) td:nth-child(odd) {
-  background-color: var(--chessboard-field-black_color);
-  color: var(--chessboard-field-white_color);
-}
-
-table.chessboard tr td.chessboard-field-selected {
-  background-color: var(--chessboard-field-selected_white_color);
-  color: var(--chessboard-field-selected_black_color);
-}
-
-table.chessboard tr:nth-child(odd) td:nth-child(even).chessboard-field-selected {
-  background-color: var(--chessboard-field-selected_black_color);
-  color: var(--chessboard-field-selected_white_color);
-}
-
-table.chessboard tr:nth-child(even) td:nth-child(odd).chessboard-field-selected {
-  background-color: var(--chessboard-field-selected_black_color);
-  color: var(--chessboard-field-selected_white_color);
-}
-
-table.chessboard tr td.chessboard-field-silent_move {
-  background-color: var(--chessboard-field-silent_move_white_color);
-  color: var(--chessboard-field-silent_move_black_color);
-}
-
-table.chessboard tr:nth-child(odd) td:nth-child(even).chessboard-field-silent_move {
-  background-color: var(--chessboard-field-silent_move_black_color);
-  color: var(--chessboard-field-silent_move_white_color);
-}
-
-table.chessboard tr:nth-child(even) td:nth-child(odd).chessboard-field-silent_move {
-  background-color: var(--chessboard-field-silent_move_black_color);
-  color: var(--chessboard-field-silent_move_white_color);
-}
-
-table.chessboard tr td.chessboard-field-attack_move {
-  background-color: var(--chessboard-field-attack_move_white_color);
-  color: var(--chessboard-field-attack_move_black_color);
-}
-
-table.chessboard tr:nth-child(odd) td:nth-child(even).chessboard-field-attack_move {
-  background-color: var(--chessboard-field-attack_move_black_color);
-  color: var(--chessboard-field-attack_move_white_color);
-}
-
-table.chessboard tr:nth-child(even) td:nth-child(odd).chessboard-field-attack_move {
-  background-color: var(--chessboard-field-attack_move_black_color);
-  color: var(--chessboard-field-attack_move_white_color);
-}
-
-.chessboard-black_pawn {
+.chessboard__black_pawn {
   background: url(../../static/images/black_pawn.png) center no-repeat;
   background-size: 8vmin;
   transition: background-size 0.1s;
 }
 
-.chessboard-white_pawn {
+.chessboard__white_pawn {
   background: url(../../static/images/white_pawn.png) center no-repeat;
   background-size: 8vmin;
   transition: background-size 0.1s;
 }
 
-.chessboard-black_queen {
+.chessboard__black_queen {
   background: url(../../static/images/black_queen.png) center no-repeat;
   background-size: 8vmin;
   transition: background-size 0.1s;
 }
 
-.chessboard-white_queen {
+.chessboard__white_queen {
   background: url(../../static/images/white_queen.png) center no-repeat;
   background-size: 8vmin;
   transition: background-size 0.1s;
 }
 
-.chessboard-selectable_field:hover {
+.chessboard__selectable_field:hover {
   cursor: pointer;
   background-size: 8.4vmin;
 }
 
-.chessboard_text-align-left_top {
+.chessboard_text__align__left_top {
   display: block;
   margin-left: 0.52vmin;
   text-align: left;
@@ -139,11 +129,11 @@ table.chessboard tr:nth-child(even) td:nth-child(odd).chessboard-field-attack_mo
   line-height: 3.02vmin;
 }
 
-.chessboard_text-a1_field-align {
+.chessboard_text__a1_field__align {
   margin-top: calc(100% - 3.02vmin - 3.02vmin - 0.2vmin);
 }
 
-.chessboard_text-align-right_bottom {
+.chessboard_text__align__right_bottom {
   display: block;
   margin-right: 0.52vmin;
   margin-bottom: 0.2vmin;
@@ -152,7 +142,7 @@ table.chessboard tr:nth-child(even) td:nth-child(odd).chessboard-field-attack_mo
   line-height: 3.02vmin;
 }
 
-.chessboard-interface {
+.chessboard__interface {
   display: inline-flex;
   flex-flow: column;
   vertical-align: top;
@@ -171,14 +161,13 @@ table.chessboard tr:nth-child(even) td:nth-child(odd).chessboard-field-attack_mo
   color: var(--block-description-selected_color);
   background-color: var(--move_history-bg_color);
   transition: color 0.2s, border-color 0.2s;
+  &:hover {
+    color: var(--block-description-active_color);
+    border-color: var(--block-border-selected_color);
+  }
 }
 
-.move_history:hover {
-  color: var(--block-description-active_color);
-  border-color: var(--block-border-selected_color);
-}
-
-#move_history-text {
+#move_history__text {
   font-family: var(--main-font-family);
   font-style: normal;
   font-weight: normal;
@@ -193,7 +182,7 @@ table.chessboard tr:nth-child(even) td:nth-child(odd).chessboard-field-attack_mo
   color: inherit;
 }
 
-#game_info-text {
+#game_info__text {
   font-family: var(--main-font-family);
   font-style: normal;
   font-weight: bold;
@@ -203,12 +192,12 @@ table.chessboard tr:nth-child(even) td:nth-child(odd).chessboard-field-attack_mo
   color: var(--game_info-color);
 }
 
-.move_history-buttons {
+.move_history__buttons {
   display: flex;
   margin-top: auto;
 }
 
-#button-show {
+#button__show {
   margin: 0 16px 16px 16px;
   width: 118px;
   height: 60px;
@@ -218,7 +207,7 @@ table.chessboard tr:nth-child(even) td:nth-child(odd).chessboard-field-attack_mo
   border-color: var(--block-border-selected_color);
 }
 
-#button-copy {
+#button__copy {
   margin: 0 16px 16px auto;
   display: inline-flex;
   width: 60px;
@@ -226,39 +215,38 @@ table.chessboard tr:nth-child(even) td:nth-child(odd).chessboard-field-attack_mo
   padding: 0;
   border-width: 2px;
   border-color: var(--block-border-selected_color);
+  &::before {
+    content: url(../../static/images/copy.svg);
+    display: inline-flex;
+    align-self: center;
+    margin: 0 auto;
+    transition: opacity 0.05s;
+  }
 }
 
-#button-show:hover,
-#button-copy:hover {
+#button__show:hover,
+#button__copy:hover {
   border-color: var(--block-border-active_color);
   background-color: var(--move_history_button-background-selected_color);
 }
 
-#button-show:disabled,
-#button-show:active,
-#button-copy:disabled,
-#button-copy:active {
+#button__show:disabled,
+#button__show:active,
+#button__copy:disabled,
+#button__copy:active {
   color: var(--move_history_button-active_color);
   border-color: var(--move_history_button-active_color);
   background-color: var(--move_history-bg_color);
 }
 
-#button-copy::before {
-  content: url(../../static/images/copy.svg);
-  display: inline-flex;
-  align-self: center;
-  margin: 0 auto;
-  transition: opacity 0.05s;
-}
-
-.interface-row {
+.interface__row {
   display: inline-block;
   width: 100%;
   height: fit-content;
   text-align: left;
 }
 
-.interface-bottom {
+.interface__bottom {
   margin-top: auto;
 }
 
@@ -279,81 +267,85 @@ button {
   color: var(--button-text-color);
   background-color: var(--move_history-bg_color);
   transition: color 0.05s, border-color 0.05s, background-color 0.05s;
+  &:hover {
+    border-color: var(--button-border-selected_color);
+    background-color: var(--button-background-selected_color);
+  }
+  &:disabled {
+    cursor: default;
+  }
+  &:disabled,
+  &:active {
+    color: var(--button-border-active_color);
+    border-color: var(--button-border-active_color);
+    background-color: var(--move_history-bg_color);
+  }
 }
 
-button:hover {
-  border-color: var(--button-border-selected_color);
-  background-color: var(--button-background-selected_color);
+#button__end {
+  width: max-content;
 }
 
-button:disabled {
-  cursor: default;
-}
-
-button:disabled,
-button:active {
-  color: var(--button-border-active_color);
-  border-color: var(--button-border-active_color);
-  background-color: var(--move_history-bg_color);
-}
-
-#button-example,
-#button-start {
+#button__example,
+#button__start {
   min-width: 140px;
   width: inherit;
   max-width: 186px;
 }
 
-#button-example,
-#button-cancel {
+#button__example,
+#button__cancel {
   margin-right: 25px;
 }
 
-#button-cancel {
+#button__cancel {
   width: 66px;
   height: 66px;
   padding: 0;
   text-align: left;
   vertical-align: top;
   display: inline-flex;
+  &::before {
+    content: url(../../static/images/cancel.svg);
+    display: inline-flex;
+    align-self: center;
+    margin: 0 auto;
+    transition: opacity 0.05s;
+  }
 }
 
-#button-cancel::before {
-  content: url(../../static/images/cancel.svg);
-  display: inline-flex;
-  align-self: center;
-  margin: 0 auto;
-  transition: opacity 0.05s;
-}
-
-#button-copy:disabled::before,
-#button-copy:active::before,
-#button-cancel:disabled::before,
-#button-cancel:active::before {
+#button__copy:disabled::before,
+#button__copy:active::before,
+#button__cancel:disabled::before,
+#button__cancel:active::before {
   opacity: 25%;
 }
 
 @media screen and (max-width: 1080px) {
-  .chessboard-interface {
+  .chessboard__interface {
     flex-flow: wrap;
     align-content: flex-start;
     margin: 0 auto 0 auto;
     width: 80vmin;
     max-width: unset;
   }
+
   .move_history {
     margin-top: 25px;
     width: 100%;
     order: 2;
   }
-  #game_info-text {
+
+  #game_info__text {
     width: 100%;
     order: 1;
   }
-  .interface-row {
+
+  .interface__row {
     width: fit-content;
   }
-  .interface-bottom {
+
+  .interface__bottom {
     margin-top: 0;
     margin-left: auto;
   }

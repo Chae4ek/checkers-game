@@ -4,12 +4,12 @@ main {
   height: 100%;
 }
 
-.main-content {
+.main__content {
   font-size: 0;
   margin: 80px 50px 0 50px;
 }
 
-.main-left {
+.main__left {
   display: inline-block;
   min-width: 350px;
   width: 35%;
@@ -18,7 +18,7 @@ main {
   margin-right: 50px;
 }
 
-.main-right {
+.main__right {
   display: inline-block;
   min-width: 350px;
   width: 35%;
