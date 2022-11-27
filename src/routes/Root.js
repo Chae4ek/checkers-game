@@ -4,7 +4,7 @@ import { Header } from "../components/Header";
 import { About } from "./About";
 import { Play } from "./Play";
 import { Rules } from "./Rules";
-import styles from "../components/styles/Main.module.scss";
+import styles from "./styles/Main.module.scss";
 
 export const Root = () => {
   return useRoutes([
@@ -23,6 +23,10 @@ export const Root = () => {
         {
           path: "rules",
           element: <Rules />,
+        },
+        {
+          path: "*",
+          element: <Navigate replace to="/" />,
         },
       ],
     },

@@ -1,6 +1,6 @@
 import { Card, CardDescription, CardImage, CardList, CardSubtitle, CardTitle, Span } from "../components/Card";
 import chessboardImage from "../static/images/chessboard.jpg";
-import styles from "../components/styles/Main.module.scss";
+import styles from "./styles/Main.module.scss";
 
 export const About = () => {
   return (
