@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
   postInit,
   clickOnShowButton,
@@ -134,8 +135,6 @@ const Chessboard = () => {
 };
 
 const ChessboardInterface = () => {
-  Promise.resolve().then(() => postInit());
-
   return (
     <div className={styles.chessboard__interface}>
       <div className={styles.move_history}>
@@ -167,6 +166,8 @@ const ChessboardInterface = () => {
 };
 
 export const Play = () => {
+  useEffect(() => postInit(), []);
+
   return (
     <>
       <Chessboard />

@@ -12,22 +12,10 @@ export const Root = () => {
       path: "/",
       element: <Layout />,
       children: [
-        {
-          path: "about",
-          element: <About />,
-        },
-        {
-          path: "play",
-          element: <Play />,
-        },
-        {
-          path: "rules",
-          element: <Rules />,
-        },
-        {
-          path: "*",
-          element: <Navigate replace to="/" />,
-        },
+        { path: "about", element: <About /> },
+        { path: "play", element: <Play /> },
+        { path: "rules", element: <Rules /> },
+        { path: "*", element: <Navigate replace to="/" /> },
       ],
     },
   ]);
