@@ -1,6 +1,7 @@
 import { cleanup, render } from "@testing-library/react";
-import { Play } from "../routes/pages/Play";
+import { Play } from "../routes/Play";
 import { ChessboardView } from "../scripts/play/render";
+import styles from "../routes/styles/Play.module.scss";
 
 let component;
 let chessboardView;
@@ -18,7 +19,7 @@ test("Set move history text", () => {
   const text = "E3-F4 f6-e5 C3-B4";
   chessboardView.setHistoryText(text);
 
-  const history = document.getElementById("move_history-text");
+  const history = document.getElementById(styles["move_history__text"]);
   expect(history).toBeInTheDocument();
   expect(history.value).toStrictEqual(text);
 });
