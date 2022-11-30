@@ -6,21 +6,21 @@
   padding-bottom: 25px;
   display: block;
   min-height: 150px;
-  color: var(--block-description-inactive_color);
-  border: 2px solid var(--block-border-inactive_color);
+  color: var(--block__description__inactive_color);
+  border: 2px solid var(--block__border__inactive_color);
   border-radius: 40px;
   transition: color 0.2s, border-color 0.2s;
   overflow: hidden;
 }
 
 .card__active {
-  color: var(--block-description-active_color);
-  border-color: var(--block-border-active_color);
+  color: var(--block__description__active_color);
+  border-color: var(--block__border__active_color);
 }
 
 .card__inactive:hover {
-  color: var(--block-description-selected_color);
-  border-color: var(--block-border-selected_color);
+  color: var(--block__description__selected_color);
+  border-color: var(--block__border__selected_color);
 }
 
 .card__active:hover .card__inactive__image,
@@ -44,7 +44,7 @@
   text-indent: 100%;
   white-space: nowrap;
   overflow: hidden;
-  background-color: var(--block-border-active_color);
+  background-color: var(--block__border__active_color);
   transform: scale(1);
   transition: transform 0.2s, opacity 0.15s;
 }
@@ -54,8 +54,6 @@
 }
 
 .card__inactive__title {
-  font-family: var(--main-font-family);
-  font-style: normal;
   font-weight: 800;
   letter-spacing: 0.02em;
   font-size: 24px;
@@ -63,8 +61,6 @@
 }
 
 .card__inactive__subtitle {
-  font-family: var(--main-font-family);
-  font-style: normal;
   font-weight: bold;
   letter-spacing: 0.01em;
   font-size: 22px;
@@ -72,17 +68,11 @@
 }
 
 .card__inactive__description {
-  font-family: var(--main-font-family);
-  font-style: normal;
-  font-weight: normal;
   font-size: 20px;
   margin: 0 25px 12px 25px;
 }
 
 .card__inactive__list {
-  font-family: var(--main-font-family);
-  font-style: normal;
-  font-weight: normal;
   font-size: 20px;
   margin: 0 25px 12px 25px;
   text-indent: 10px;

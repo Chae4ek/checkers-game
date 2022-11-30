@@ -1,0 +1,102 @@
+:export {
+  theme_light: theme_light;
+  theme_dark: theme_dark;
+}
+
+.theme_light {
+  --main__background__color: #fff;
+  --main__background__transparent_color: #ffffffd8;
+  --main__font_family: "Exo 2", sans-serif;
+
+  --title__font_family: "Fredoka One", cursive;
+  --title__color: #888888;
+  --navigation__active_color: #2372d8;
+  --navigation__selected_color: #cddcfd;
+  --navigation__inactive_color: #9cb6f0;
+
+  --block__description__active_color: #f76060;
+  --block__description__selected_color: #f8a099;
+  --block__description__inactive_color: #fdc2ba;
+  --block__border__active_color: #fc8484;
+  --block__border__selected_color: #ffb9b3;
+  --block__border__inactive_color: #fcd2ca;
+
+  --selection__color: #fff;
+  --selection__background: #7070f8d7;
+
+  --footer__color: #9a9ef7;
+  --footer__title__color: #fff;
+  --footer__separator__color: #d1dffd;
+  --footer__rights__color: #dbe6fd;
+  --footer__link__color: #fff;
+
+  --chessboard__field__black_color: #9faf88;
+  --chessboard__field__white_color: #eeeed5;
+  --chessboard__field__selected_black_color: #e5d757;
+  --chessboard__field__selected_white_color: #fff387;
+  --chessboard__field__silent_move_black_color: #8cd775;
+  --chessboard__field__silent_move_white_color: #afff98;
+  --chessboard__field__attack_move_black_color: #df5851;
+  --chessboard__field__attack_move_white_color: #ff7b74;
+  --chessboard__board__radius: 2.083vmin;
+
+  --button__border__color: #9798f6;
+  --button__border__selected_color: #8385f6;
+  --button__border__active_color: #d7d9ff;
+  --button__text__color: #7577f9;
+  --button__background__selected_color: #e7e7f7;
+  --move_history__background__color: #f4f4ff;
+  --move_history_button__color: #f76060;
+  --move_history_button__active_color: #ffc8c8e7;
+  --move_history_button__background__selected_color: #ede7f7;
+  --game_info__color: #888888;
+}
+
+.theme_dark {
+  --main__background__color: #242426;
+  --main__background__transparent_color: #242426d8;
+  --main__font_family: "Exo 2", sans-serif;
+
+  --title__font_family: "Fredoka One", cursive;
+  --title__color: #fff;
+  --navigation__active_color: #fff2bd;
+  --navigation__selected_color: #504d44;
+  --navigation__inactive_color: #7c7763;
+
+  --block__description__active_color: #c69de7;
+  --block__description__selected_color: #8662a3;
+  --block__description__inactive_color: #614e7d;
+  --block__border__active_color: #8c68aa;
+  --block__border__selected_color: #63457c;
+  --block__border__inactive_color: #493565;
+
+  --selection__color: #fff;
+  --selection__background: #5e5effd7;
+
+  --footer__color: #2d2e37;
+  --footer__title__color: #515881;
+  --footer__separator__color: #424767;
+  --footer__rights__color: #8a99b9;
+  --footer__link__color: #cacbcd;
+
+  --chessboard__field__black_color: #9faf88;
+  --chessboard__field__white_color: #eeeed5;
+  --chessboard__field__selected_black_color: #e5d757;
+  --chessboard__field__selected_white_color: #fff387;
+  --chessboard__field__silent_move_black_color: #8cd775;
+  --chessboard__field__silent_move_white_color: #afff98;
+  --chessboard__field__attack_move_black_color: #df5851;
+  --chessboard__field__attack_move_white_color: #ff7b74;
+  --chessboard__board__radius: 2.083vmin;
+
+  --button__border__color: #847141;
+  --button__border__selected_color: #a98e4a;
+  --button__border__active_color: #d7b55b40;
+  --button__text__color: #d7b55b;
+  --button__background__selected_color: #332e21;
+  --move_history__background__color: #202022;
+  --move_history_button__color: #af86d0;
+  --move_history_button__active_color: #af86d040;
+  --move_history_button__background__selected_color: #2d253a;
+  --game_info__color: #fff;
+}

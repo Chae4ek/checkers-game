@@ -4,6 +4,9 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { Root } from "./routes/Root";
+import { setTheme } from "./themes/themes";
+
+setTheme();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

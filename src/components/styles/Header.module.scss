@@ -1,21 +1,12 @@
 @import "./All.module.scss";
 
-:root {
-  --main-transparent-bg-color: #242426d8;
-  --title-font-family: "Fredoka One", cursive;
-  --title-color: #fff;
-  --navigation-active_color: #fff2bd;
-  --navigation-selected_color: #504d44;
-  --navigation-inactive_color: #7c7763;
-}
-
 header {
   display: inline-block;
   position: fixed;
   top: 0;
   width: 100%;
   height: 80px;
-  background-color: var(--main-transparent-bg-color);
+  background-color: var(--main__background__transparent_color);
   backdrop-filter: blur(4px);
   z-index: 100;
 }
@@ -23,11 +14,9 @@ header {
 .header__left {
   display: inline-block;
   margin: 16px 0 16px 25px;
-  font-family: var(--title-font-family);
-  font-style: normal;
-  font-weight: normal;
+  font-family: var(--title__font_family);
   font-size: 40px;
-  color: var(--title-color);
+  color: var(--title__color);
 }
 
 .header__right {
@@ -41,32 +30,31 @@ header {
 
 .header__link {
   display: inline-block;
-  font-family: var(--main-font-family);
-  font-style: normal;
   font-weight: bold;
   font-size: 24px;
   letter-spacing: 0.01em;
   text-transform: uppercase;
   margin: 0 45px 0 45px;
   text-decoration: none;
-  color: var(--navigation-active_color);
+  color: var(--navigation__active_color);
   padding-bottom: 2px;
-  background: 50% 100% / 0 2px linear-gradient(var(--navigation-active_color), var(--navigation-active_color)) no-repeat;
+  background: 50% 100% / 0 2px linear-gradient(var(--navigation__active_color), var(--navigation__active_color))
+    no-repeat;
   transition: background-size 0.2s, color 0.1s;
   &:hover {
     background-size: 100% 2px;
     background-origin: auto 40%;
   }
   &:active {
-    color: var(--navigation-selected_color);
-    background: 50% 100% / 0 2px linear-gradient(var(--navigation-selected_color), var(--navigation-selected_color))
+    color: var(--navigation__selected_color);
+    background: 50% 100% / 0 2px linear-gradient(var(--navigation__selected_color), var(--navigation__selected_color))
       no-repeat;
   }
 }
 
 .header__link__current_page {
-  color: var(--navigation-inactive_color);
-  background: 50% 100% / 0 2px linear-gradient(var(--navigation-inactive_color), var(--navigation-inactive_color))
+  color: var(--navigation__inactive_color);
+  background: 50% 100% / 0 2px linear-gradient(var(--navigation__inactive_color), var(--navigation__inactive_color))
     no-repeat;
 }
 
