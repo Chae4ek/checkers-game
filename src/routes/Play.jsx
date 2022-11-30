@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Button } from "../components/Button";
 import {
   postInit,
   clickOnShowButton,
@@ -140,26 +141,18 @@ const ChessboardInterface = () => {
       <div className={styles.move_history}>
         <textarea id={styles["move_history__text"]}></textarea>
         <div className={styles.move_history__buttons}>
-          <button id={styles["button__show"]} onClick={clickOnShowButton}>
-            Показать
-          </button>
-          <button id={styles["button__copy"]} onClick={clickOnCopyButton}></button>
+          <Button text="Показать" id={styles["button__show"]} onClick={clickOnShowButton} />
+          <Button id={styles["button__copy"]} onClick={clickOnCopyButton} />
         </div>
       </div>
       <div className={styles.interface__row}>
-        <button id={styles["button__example"]} onClick={clickOnExampleButton}>
-          Пример
-        </button>
-        <button id={styles["button__start"]} onClick={clickOnStartButton}>
-          Старт
-        </button>
+        <Button text="Пример" id={styles["button__example"]} onClick={clickOnExampleButton} />
+        <Button text="Старт" id={styles["button__start"]} onClick={clickOnStartButton} />
       </div>
       <p id={styles["game_info__text"]}>Нажмите &quot;Старт&quot;, чтобы начать</p>
       <div className={`${styles.interface__row} ${styles.interface__bottom}`}>
-        <button id={styles["button__cancel"]} onClick={clickOnCancelButton}></button>
-        <button id={styles["button__end"]} onClick={clickOnEndButton}>
-          Завершить ход
-        </button>
+        <Button id={styles["button__cancel"]} onClick={clickOnCancelButton} />
+        <Button text="Завершить ход" id={styles["button__end"]} onClick={clickOnEndButton} />
       </div>
     </div>
   );
