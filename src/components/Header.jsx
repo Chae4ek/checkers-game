@@ -10,16 +10,16 @@ export const Header = () => {
     setCurrentPage(page);
   };
 
-  const location = useLocation();
+  const locationPathname = useLocation().pathname;
   useEffect(() => {
     const trySetPage = (page, title, pattern) => {
-      if (pattern.test(location.pathname)) setPage(page, title);
+      if (pattern.test(locationPathname)) setPage(page, title);
     };
     setPage(0, "Checkers Game");
     trySetPage(1, "Checkers Game | About", /^[/]about/);
     trySetPage(2, "Checkers Game | Play", /^[/]play/);
     trySetPage(3, "Checkers Game | Rules", /^[/]rules/);
-  }, [location]);
+  }, [locationPathname]);
 
   const getStyle = (page) => {
     let style = styles.header__link;
