@@ -1,6 +1,8 @@
 import { Button } from "../components/Button";
 import { styleVarsForRoot } from "./styleVarsForRoot";
 import styles from "../routes/styles/Play.module.scss";
+import { userEvent, waitFor, within } from "@storybook/testing-library";
+import { expect } from "@storybook/jest";
 
 export default {
   title: "Checkers/Button",
@@ -23,7 +25,7 @@ const TemplateButton = ({ text, onClick, ...args }) => {
     <>
       {styleVarsForRoot(args)}
       <Row>
-        <Button text={text} onClick={onClick} />
+        <Button data-testid="active_button" text={text} onClick={onClick} />
         <Button id={styles["button__cancel"]} onClick={onClick} />
       </Row>
       <Row>
@@ -31,7 +33,7 @@ const TemplateButton = ({ text, onClick, ...args }) => {
         <Button className="hovered_button" onClick={onClick} id={styles["button__cancel"]} />
       </Row>
       <Row>
-        <Button disabled onClick={onClick} text={text} />
+        <Button disabled onClick={onClick} data-testid="disabled_button" text={text} />
         <Button disabled onClick={onClick} id={styles["button__cancel"]} />
       </Row>
     </>
@@ -44,4 +46,15 @@ button.args = {
 };
 button.parameters = {
   pseudo: { hover: [".hovered_button"] },
+};
+button.play = async ({ args, canvasElement }) => {
+  const canvas = within(canvasElement);
+
+  const button = canvas.getByTestId("active_button");
+  userEvent.click(button);
+
+  const disabledButton = canvas.getByTestId("disabled_button");
+  userEvent.click(disabledButton);
+
+  await waitFor(() => expect(args.onClick).toHaveBeenCalledTimes(1));
 };
