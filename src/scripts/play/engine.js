@@ -57,6 +57,7 @@ export class ChessboardModel {
    */
   undoMove() {
     const lastMove = this.moveHistory.moves.pop();
+    if (lastMove === undefined) return null;
     lastMove.toField.piece = null;
     lastMove.fromField.piece = lastMove.pieceToMove;
     lastMove.pieceToMove.field = lastMove.fromField;
