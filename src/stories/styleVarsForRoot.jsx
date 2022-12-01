@@ -1,5 +1,4 @@
-export const styleVarsForRoot = (...args) => {
-  const varValues = args[0];
+export const styleVarsForRoot = (varValues) => {
   const varNames = Object.keys(varValues);
 
   if (!varNames.length) return <></>;
