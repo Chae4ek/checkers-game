@@ -13,17 +13,17 @@
 Запуск приложения:
 
 ```
-npm start
+yarn dev
 ```
 
 Сборка для развертывания:
 
 ```
-npm run build
+yarn build
 ```
 
 Запуск тестов:
 
 ```
-npm test
+yarn test
 ```
