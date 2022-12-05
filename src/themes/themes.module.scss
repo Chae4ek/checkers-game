@@ -3,7 +3,7 @@
   theme_dark: theme_dark;
 }
 
-.theme_light {
+:global(.theme_light) {
   --main__background__color: #fff;
   --main__background__transparent_color: #ffffffd8;
   --main__font_family: "Exo 2", sans-serif;
@@ -52,7 +52,7 @@
   --game_info__color: #888888;
 }
 
-.theme_dark {
+:global(.theme_dark) {
   --main__background__color: #242426;
   --main__background__transparent_color: #242426d8;
   --main__font_family: "Exo 2", sans-serif;

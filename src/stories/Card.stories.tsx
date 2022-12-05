@@ -1,5 +1,6 @@
+import { FC } from "react";
 import { Card, CardDescription, CardImage, CardList, CardTitle, Span } from "../components/Card";
-import { styleVarsForRoot } from "./styleVarsForRoot";
+import { styleVarsForRoot } from "./helper";
 import styles from "../routes/styles/Main.module.scss";
 import chessboardImage from "../static/images/chessboard.jpg";
 
@@ -15,8 +16,8 @@ export default {
   },
 };
 
-const TemplateCardSimple = (args) => {
-  const CardWithData = ({ active }) => (
+const TemplateCardSimple: FC = (args) => {
+  const CardWithData: FC<{ active: boolean }> = ({ active }) => (
     <Card active={active}>
       <CardTitle>Цепной ход</CardTitle>
       <CardDescription>
@@ -36,8 +37,8 @@ const TemplateCardSimple = (args) => {
   );
 };
 
-const TemplateCardWithList = (args) => {
-  const CardWithData = ({ active }) => (
+const TemplateCardWithList: FC = (args) => {
+  const CardWithData: FC<{ active: boolean }> = ({ active }) => (
     <Card active={active}>
       <CardTitle>Обязательное взятие</CardTitle>
       <CardDescription>
@@ -61,8 +62,8 @@ const TemplateCardWithList = (args) => {
   );
 };
 
-const TemplateCardWithImage = (args) => {
-  const CardWithData = ({ active }) => (
+const TemplateCardWithImage: FC = (args) => {
+  const CardWithData: FC<{ active: boolean }> = ({ active }) => (
     <Card active={active}>
       <CardImage image={chessboardImage} alt="Шахматная доска" />
       <CardTitle>Об игре</CardTitle>
@@ -84,8 +85,8 @@ const TemplateCardWithImage = (args) => {
   );
 };
 
-export const simpleCard = TemplateCardSimple.bind();
+export const simpleCard = TemplateCardSimple.bind({});
 
-export const cardWithList = TemplateCardWithList.bind();
+export const cardWithList = TemplateCardWithList.bind({});
 
-export const cardWithImage = TemplateCardWithImage.bind();
+export const cardWithImage = TemplateCardWithImage.bind({});

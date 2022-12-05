@@ -20,6 +20,6 @@ const TemplateFooter = () => (
   </>
 );
 
-export const header = TemplateHeader.bind();
+export const header = TemplateHeader.bind({});
 
-export const footer = TemplateFooter.bind();
+export const footer = TemplateFooter.bind({});

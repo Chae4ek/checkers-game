@@ -2,12 +2,14 @@ import { Rules, ChessboardModel } from "./engine";
 import { ChessboardView } from "./render";
 import { ChessboardController } from "./controller";
 
-let chessboardController = null;
+export let chessboardController: ChessboardController;
+export let chessboardModel: ChessboardModel;
+export let chessboardView: ChessboardView;
 
 export const postInit = () => {
   const rules = new Rules(false, true, true, true, false);
-  const chessboardModel = new ChessboardModel(rules);
-  const chessboardView = new ChessboardView();
+  chessboardModel = new ChessboardModel(rules);
+  chessboardView = new ChessboardView();
   chessboardController = new ChessboardController(chessboardModel, chessboardView);
 };
 

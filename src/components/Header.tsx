@@ -5,7 +5,7 @@ import styles from "./styles/Header.module.scss";
 export const Header = () => {
   const [currentPage, setCurrentPage] = useState(0);
 
-  const setPage = (page, title) => {
+  const setPage = (page: number, title: string) => {
     document.title = title;
     setCurrentPage(page);
   };
@@ -13,7 +13,7 @@ export const Header = () => {
   const { pathname } = useLocation();
   useEffect(() => {
     window.scrollTo(0, 0);
-    const trySetPage = (page, title, pattern) => {
+    const trySetPage = (page: number, title: string, pattern: RegExp) => {
       if (pattern.test(pathname)) setPage(page, title);
     };
     setPage(0, "Checkers Game");
@@ -22,7 +22,7 @@ export const Header = () => {
     trySetPage(3, "Checkers Game | Rules", /^[/]rules/);
   }, [pathname]);
 
-  const getStyle = (page) => {
+  const getStyle = (page: number) => {
     let style = styles.header__link;
     if (currentPage === page) style += ` ${styles.header__link__current_page}`;
     return style;

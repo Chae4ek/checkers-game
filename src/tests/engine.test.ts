@@ -3,12 +3,12 @@ import { Rules, ChessboardModel, Field, Pawn, PieceColor, MoveType, Move } from 
 const rules = new Rules(false, true, true, true, false);
 const chessboardModel = new ChessboardModel(rules);
 
-const setBoard = (FAN) => {
+const setBoard = (FAN: string) => {
   chessboardModel.setBoard(FAN.replace(/[ \n\t]/g, ""));
 };
 
 test("Set default board", () => {
-  const checkPawn = (row, column, color) => {
+  const checkPawn = (row: number, column: number, color: PieceColor | null) => {
     const field = chessboardModel.board[row][column];
     expect(field).toBeInstanceOf(Field);
     expect(field.row).toStrictEqual(row);
@@ -17,9 +17,10 @@ test("Set default board", () => {
     if (color === null) {
       expect(field.piece).toBeNull();
     } else {
+      expect(field.piece).not.toBeNull();
       expect(field.piece).toBeInstanceOf(Pawn);
-      expect(field.piece.field).toBe(field);
-      expect(field.piece.color).toStrictEqual(color);
+      expect(field.piece!.field).toBe(field);
+      expect(field.piece!.color).toStrictEqual(color);
     }
   };
 
@@ -54,20 +55,20 @@ test("Set default board", () => {
   }
 });
 
-const checkMoves = (expectedMoves, moves) => {
-  const checkMovesOf = (moveType) => {
+const checkMoves = (expectedMoves: Map<MoveType, Move[]>, moves: Map<MoveType, Move[]>) => {
+  const checkMovesOf = (moveType: MoveType) => {
     expect(moves.has(moveType)).toBeTruthy();
     const typedExpectedMoves = expectedMoves.get(moveType);
     const typedMoves = moves.get(moveType);
 
-    expect(typedMoves.length).toStrictEqual(typedExpectedMoves.length);
+    expect(typedMoves!.length).toStrictEqual(typedExpectedMoves!.length);
 
-    typedExpectedMoves.forEach((expectedMove) => {
+    typedExpectedMoves!.forEach((expectedMove) => {
       const expectedRow = expectedMove.toField.row;
       const expectedColumn = expectedMove.toField.column;
       const isFound =
         undefined !==
-        typedMoves.find((move) => move.toField.row === expectedRow && move.toField.column === expectedColumn);
+        typedMoves!.find((move) => move.toField.row === expectedRow && move.toField.column === expectedColumn);
       expect(isFound).toBeTruthy();
     });
   };
@@ -77,10 +78,13 @@ const checkMoves = (expectedMoves, moves) => {
   if (expectedMoves.has(MoveType.ATTACK)) checkMovesOf(MoveType.ATTACK);
 };
 
-const makeMoveMap = (silentPositions, attackPositions) => {
-  const moves = new Map();
-  const silentMoves = [];
-  const attackMoves = [];
+const makeMoveMap = (
+  silentPositions: { row: number; column: number }[],
+  attackPositions: { row: number; column: number }[]
+) => {
+  const moves = new Map<MoveType, Move[]>();
+  const silentMoves: Move[] = [];
+  const attackMoves: Move[] = [];
   const nullField = new Field(0, 0, chessboardModel);
   silentPositions.forEach(({ row, column }) =>
     silentMoves.push(new Move(nullField, new Field(row, column, chessboardModel)))

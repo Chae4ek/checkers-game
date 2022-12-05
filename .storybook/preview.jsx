@@ -1,6 +1,6 @@
 import { setTheme } from "../src/themes/themes";
 import "../src/index.css";
-import themes from "../src/themes/themes.scss";
+import themes from "../src/themes/themes.module.scss";
 
 export const globalTypes = {
   theme: {

@@ -1,8 +1,10 @@
+import { ComponentStory } from "@storybook/react";
 import { Button } from "../components/Button";
-import { styleVarsForRoot } from "./styleVarsForRoot";
+import { styleVarsForRoot } from "./helper";
 import styles from "../routes/styles/Play.module.scss";
 import { userEvent, waitFor, within } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
+import { FC, PropsWithChildren } from "react";
 
 export default {
   title: "Checkers/Button",
@@ -18,9 +20,9 @@ export default {
   },
 };
 
-const Row = ({ children }) => <div style={{ display: "flex", columnGap: 20 }}>{children}</div>;
+const Row: FC<PropsWithChildren> = ({ children }) => <div style={{ display: "flex", columnGap: 20 }}>{children}</div>;
 
-const TemplateButton = ({ text, onClick, ...args }) => {
+const TemplateButton: FC<{ text: string; onClick: () => void }> = ({ text, onClick, ...args }) => {
   return (
     <>
       {styleVarsForRoot(args)}
@@ -40,7 +42,7 @@ const TemplateButton = ({ text, onClick, ...args }) => {
   );
 };
 
-export const button = TemplateButton.bind();
+export const button = TemplateButton.bind({}) as ComponentStory<typeof TemplateButton>;
 button.args = {
   text: "Button Text",
 };

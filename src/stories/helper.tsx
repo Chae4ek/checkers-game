@@ -1,4 +1,6 @@
-export const styleVarsForRoot = (varValues) => {
+import { FC } from "react";
+
+export const styleVarsForRoot: FC<{ [x: string]: unknown }> = (varValues) => {
   const varNames = Object.keys(varValues);
 
   if (!varNames.length) return <></>;

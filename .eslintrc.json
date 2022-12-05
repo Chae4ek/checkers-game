@@ -4,7 +4,14 @@
     "es2021": true,
     "jest": true
   },
-  "extends": ["eslint:recommended", "plugin:react/recommended", "eslint-config-prettier"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "eslint-config-prettier",
+    "plugin:jsx-a11y/recommended",
+    "plugin:import/typescript",
+    "plugin:@typescript-eslint/recommended"
+  ],
   "overrides": [],
   "parserOptions": {
     "ecmaVersion": "latest",
@@ -23,7 +30,6 @@
     }
   },
   "rules": {
-    "react/react-in-jsx-scope": "off",
-    "react/prop-types": "off"
+    "react/react-in-jsx-scope": "off"
   }
 }

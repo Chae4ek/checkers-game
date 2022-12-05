@@ -1,12 +1,24 @@
 export class Rules {
+  canAttackMoveBackward: boolean;
+  isAttackMandatory: boolean;
+  firstPlayerIsWhite: boolean;
+  canAttackChainMove: boolean;
+  canInterruptChainMove: boolean;
+
   /**
-   * @param {boolean} canAttackMoveBackward whether a simple piece can make an attacking move backwards
-   * @param {boolean} isAttackMandatory whether an attack move is mandatory
-   * @param {boolean} firstPlayerIsWhite whether the first player is white, else is black
-   * @param {boolean} canAttackChainMove whether chain move is allowed, else only simple moves even if a chain move is possible
-   * @param {boolean} canInterruptChainMove whether you can finish your turn in the middle of a chain move
+   * @param canAttackMoveBackward whether a simple piece can make an attacking move backwards
+   * @param isAttackMandatory whether an attack move is mandatory
+   * @param firstPlayerIsWhite whether the first player is white, else is black
+   * @param canAttackChainMove whether chain move is allowed, else only simple moves even if a chain move is possible
+   * @param canInterruptChainMove whether you can finish your turn in the middle of a chain move
    */
-  constructor(canAttackMoveBackward, isAttackMandatory, firstPlayerIsWhite, canAttackChainMove, canInterruptChainMove) {
+  constructor(
+    canAttackMoveBackward: boolean,
+    isAttackMandatory: boolean,
+    firstPlayerIsWhite: boolean,
+    canAttackChainMove: boolean,
+    canInterruptChainMove: boolean
+  ) {
     this.canAttackMoveBackward = canAttackMoveBackward;
     this.isAttackMandatory = isAttackMandatory;
     this.firstPlayerIsWhite = firstPlayerIsWhite;
@@ -16,10 +28,13 @@ export class Rules {
 }
 
 export class ChessboardModel {
-  /**
-   * @param {Rules} rules
-   */
-  constructor(rules) {
+  rules: Rules;
+  board: Field[][];
+  moveHistory: MoveHistory;
+  firstPlayerColor: PieceColor;
+  currentPlayerColor: PieceColor;
+
+  constructor(rules: Rules) {
     this.rules = rules;
     this.board = [];
     for (let row = 0; row < 8; ++row) {
@@ -35,11 +50,9 @@ export class ChessboardModel {
   }
 
   /**
-   * @param {Field} fromField
-   * @param {Field} toField
-   * @returns {Move?} move that was made or null if move is incorrect
+   * @returns move that was made or null if move is incorrect
    */
-  tryMove(fromField, toField) {
+  tryMove(fromField: Field, toField: Field): Move | null {
     const move = this.#createMove(fromField, toField);
     if (move !== null) this.#makeMove(move);
     return move;
@@ -53,31 +66,31 @@ export class ChessboardModel {
   /**
    * Undo last move and returns it
    *
-   * @returns {Move?} previous move or null if none
+   * @returns previous move or null if none
    */
-  undoMove() {
+  undoMove(): Move | null {
     const lastMove = this.moveHistory.moves.pop();
     if (lastMove === undefined) return null;
     lastMove.toField.piece = null;
     lastMove.fromField.piece = lastMove.pieceToMove;
     lastMove.pieceToMove.field = lastMove.fromField;
-    if (lastMove.attackedPiece !== null) lastMove.attackedField.piece = lastMove.attackedPiece;
+    if (lastMove.attackedField !== null) lastMove.attackedField.piece = lastMove.attackedPiece;
     return lastMove;
   }
 
   /**
-   * @returns {boolean} true if current move is chain attack
+   * @returns true if current move is chain attack
    */
-  isNowChainAttack() {
+  isNowChainAttack(): boolean {
     if (!this.rules.canAttackChainMove) return false;
     const lastMove = this.moveHistory.moves[this.moveHistory.moves.length - 1];
     return lastMove !== undefined && this.currentPlayerColor === lastMove.pieceToMove.color;
   }
 
   /**
-   * @returns {Move?} a move or null if the move is incorrect
+   * @returns a move or null if the move is incorrect
    */
-  #createMove(fromField, toField) {
+  #createMove(fromField: Field, toField: Field): Move | null {
     const createdMove = new Move(fromField, toField);
     for (const [, moves] of this.getPossibleMoves(fromField.row, fromField.column)) {
       for (const move of moves) {
@@ -91,8 +104,8 @@ export class ChessboardModel {
     return null;
   }
 
-  #makeMove(move) {
-    let piece = move.fromField.piece;
+  #makeMove(move: Move) {
+    let piece = move.fromField.piece!;
     piece.field = move.toField;
     if (piece instanceof Pawn) {
       if (piece.color === PieceColor.WHITE && move.toField.row === 0) piece = new Queen(move.toField, piece.color);
@@ -102,7 +115,7 @@ export class ChessboardModel {
     move.toField.piece = piece;
 
     move.fromField.piece = null;
-    if (move.attackedPiece !== null) move.attackedField.piece = null;
+    if (move.attackedField !== null) move.attackedField.piece = null;
 
     this.moveHistory.moves.push(move);
     return move;
@@ -115,9 +128,9 @@ export class ChessboardModel {
    * 'q' == black queen
    * 'Q' == white queen
    *
-   * @param {string} FAN notation of figure placement by rows. Starts from A8 to H1
+   * @param FAN notation of figure placement by rows. Starts from A8 to H1
    */
-  setBoard(FAN) {
+  setBoard(FAN: string) {
     if (FAN.length !== this.board.length * this.board[0].length) {
       throw new Error(`FAN size (${FAN.length}) is not equal board size (64)`);
     }
@@ -149,9 +162,9 @@ export class ChessboardModel {
   }
 
   /**
-   * @returns {Map<MoveType, Move[]>} allowed fields to move from specified position
+   * @returns allowed fields to move from specified position
    */
-  getPossibleMoves(row, column) {
+  getPossibleMoves(row: number, column: number): Map<MoveType, Move[]> {
     const moves = this.#getPossibleMovesWithoutMandatoryAttackRule(row, column);
 
     if (this.isNowChainAttack()) {
@@ -161,8 +174,12 @@ export class ChessboardModel {
 
     if (this.rules.isAttackMandatory) {
       if (!moves.has(MoveType.SILENT)) return moves;
+
+      const piece = this.board[row][column].piece;
+      if (piece === null) return moves;
+
       this.forEachField((field) => {
-        if (field.piece !== null && field.piece.color === this.board[row][column].piece.color) {
+        if (field.piece !== null && field.piece.color === piece.color) {
           if (this.#getPossibleMovesWithoutMandatoryAttackRule(field.row, field.column).has(MoveType.ATTACK)) {
             moves.delete(MoveType.SILENT);
             return false;
@@ -175,23 +192,24 @@ export class ChessboardModel {
     return moves;
   }
 
-  #getPossibleMovesWithoutMandatoryAttackRule(row, column) {
-    return this.board[row][column].piece === null ? new Map() : this.board[row][column].piece.getPossibleMoves();
+  #getPossibleMovesWithoutMandatoryAttackRule(row: number, column: number): Map<MoveType, Move[]> {
+    const piece = this.board[row][column].piece;
+    return piece === null ? new Map() : piece.getPossibleMoves();
   }
 
   /**
-   * @returns {Field?} field if its coords are correct
+   * @returns field if its coords are correct
    */
-  getField(row, column) {
+  getField(row: number, column: number): Field | null {
     if (row >= 0 && row < this.board.length && column >= 0 && column < this.board[0].length)
       return this.board[row][column];
     return null;
   }
 
   /**
-   * @param {(Field) => boolean} action if it returns false the iteration will stop
+   * @param action if it returns false the iteration will stop
    */
-  forEachField(action) {
+  forEachField(action: (field: Field) => boolean) {
     for (let row = 0; row < this.board.length; ++row) {
       for (let column = 0; column < this.board[0].length; ++column) {
         if (!action(this.board[row][column])) return;
@@ -201,45 +219,50 @@ export class ChessboardModel {
 }
 
 export class Field {
-  /**
-   * @param {number} row
-   * @param {number} column
-   * @param {ChessboardModel} chessboardModel
-   */
-  constructor(row, column, chessboardModel) {
+  row: number;
+  column: number;
+  chessboardModel: ChessboardModel;
+  piece: Piece | null = null;
+
+  constructor(row: number, column: number, chessboardModel: ChessboardModel) {
     this.row = row;
     this.column = column;
     this.chessboardModel = chessboardModel;
-    this.piece = null;
   }
 }
 
-export const MoveType = { SILENT: 0, ATTACK: 1 };
-export const PieceColor = { BLACK: 0, WHITE: 1 };
+export enum MoveType {
+  SILENT,
+  ATTACK,
+}
+
+export enum PieceColor {
+  BLACK,
+  WHITE,
+}
 
 export class Piece {
-  /**
-   * @param {Field} field
-   * @param {PieceColor} color
-   */
-  constructor(field, color) {
+  field: Field;
+  color: PieceColor;
+
+  constructor(field: Field, color: PieceColor) {
     this.field = field;
     this.color = color;
   }
 
-  getPossibleMoves() {
+  getPossibleMoves(): Map<MoveType, Move[]> {
     return new Map();
   }
 }
 
-const addAllowedMove = (allowedMoves, moveType, move) => {
+const addAllowedMove = (allowedMoves: Map<MoveType, Move[]>, moveType: MoveType, move: Move) => {
   let list = allowedMoves.get(moveType);
   if (list === undefined) allowedMoves.set(moveType, (list = []));
   list.push(move);
 };
 
 export class Pawn extends Piece {
-  getPossibleMoves() {
+  getPossibleMoves(): Map<MoveType, Move[]> {
     const allowedMoves = new Map();
     const colorCoeff = this.color === PieceColor.BLACK ? 1 : -1;
     this.#tryAddAttackMove(colorCoeff, -1, allowedMoves);
@@ -255,7 +278,7 @@ export class Pawn extends Piece {
     return allowedMoves;
   }
 
-  #tryAddSilentMove(rowVector, columnVector, allowedMoves) {
+  #tryAddSilentMove(rowVector: number, columnVector: number, allowedMoves: Map<MoveType, Move[]>) {
     const toField = this.field.chessboardModel.getField(this.field.row + rowVector, this.field.column + columnVector);
     if (toField !== null && toField.piece === null) {
       const move = new Move(this.field, toField);
@@ -263,7 +286,7 @@ export class Pawn extends Piece {
     }
   }
 
-  #tryAddAttackMove(rowVector, columnVector, allowedMoves) {
+  #tryAddAttackMove(rowVector: number, columnVector: number, allowedMoves: Map<MoveType, Move[]>) {
     const attackedField = this.field.chessboardModel.getField(
       this.field.row + rowVector,
       this.field.column + columnVector
@@ -284,7 +307,7 @@ export class Pawn extends Piece {
 }
 
 export class Queen extends Piece {
-  getPossibleMoves() {
+  getPossibleMoves(): Map<MoveType, Move[]> {
     const allowedMoves = new Map();
     this.#tryRayCastAndAddMoves(1, 1, allowedMoves);
     this.#tryRayCastAndAddMoves(1, -1, allowedMoves);
@@ -296,11 +319,11 @@ export class Queen extends Piece {
     return allowedMoves;
   }
 
-  #tryRayCastAndAddMoves(rowVector, columnVector, allowedMoves) {
+  #tryRayCastAndAddMoves(rowVector: number, columnVector: number, allowedMoves: Map<MoveType, Move[]>) {
     let row = this.field.row + rowVector,
       column = this.field.column + columnVector;
     let toField = this.field.chessboardModel.getField(row, column);
-    let move = new Move(this.field, toField);
+    let move = new Move(this.field, toField!);
     while (toField !== null) {
       if (toField.piece !== null) {
         if (move.attackedPiece !== null || toField.piece.color === this.color) return;
@@ -323,28 +346,23 @@ export class Queen extends Piece {
 }
 
 export class Move {
-  /**
-   * @param {Field} fromField
-   * @param {Field} toField
-   */
-  constructor(fromField, toField) {
-    this.pieceToMove = fromField.piece;
+  pieceToMove: Piece;
+  fromField: Field;
+  toField: Field;
+  attackedField: Field | null = null;
+  attackedPiece: Piece | null = null;
+
+  constructor(fromField: Field, toField: Field) {
+    this.pieceToMove = fromField.piece!;
     this.fromField = fromField;
     this.toField = toField;
-    this.attackedField = null;
-    this.attackedPiece = null;
   }
 }
 
 export class MoveHistory {
-  constructor() {
-    this.moves = [];
-  }
+  moves: Move[] = [];
 
-  /**
-   * @returns {string}
-   */
-  convertToString() {
+  convertToString(): string {
     let historyString = "";
     let prevMove = this.moves[0];
     for (const move of this.moves) {
@@ -368,11 +386,7 @@ export class MoveHistory {
     return historyString;
   }
 
-  /**
-   * @param {Field} field
-   * @returns {string}
-   */
-  #fieldToString(field) {
+  #fieldToString(field: Field): string {
     return String.fromCharCode("a".charCodeAt(0) + field.column) + (8 - field.row);
   }
 }

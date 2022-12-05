@@ -1,12 +1,12 @@
-import { MoveType, PieceColor, Pawn } from "./engine";
-import { FieldType } from "./render";
+import { MoveType, PieceColor, Pawn, ChessboardModel, Field, Piece, Move } from "./engine";
+import { ChessboardView, FieldType } from "./render";
 
 export class ChessboardController {
-  /**
-   * @param {ChessboardModel} chessboardModel
-   * @param {ChessboardView} chessboardView
-   */
-  constructor(chessboardModel, chessboardView) {
+  chessboardModel: ChessboardModel;
+  chessboardView: ChessboardView;
+  selectedField: Field | null;
+
+  constructor(chessboardModel: ChessboardModel, chessboardView: ChessboardView) {
     this.chessboardModel = chessboardModel;
     this.chessboardView = chessboardView;
     this.selectedField = null;
@@ -16,10 +16,10 @@ export class ChessboardController {
   /**
    * Calls when mouse clicks on field at (row, column) position
    */
-  clickOnFieldEvent(row, column) {
+  clickOnFieldEvent(row: number, column: number) {
     if (!this.chessboardView.isSelectableField(row, column)) return;
 
-    const clickedField = this.chessboardModel.getField(row, column);
+    const clickedField = this.chessboardModel.getField(row, column)!;
 
     if (this.selectedField === clickedField) this.#unsetSelectedField();
     else if (this.selectedField === null) this.#setSelectedField(clickedField);
@@ -27,7 +27,7 @@ export class ChessboardController {
   }
 
   #unsetSelectedField() {
-    const clickedField = this.selectedField;
+    const clickedField = this.selectedField!;
 
     this.#disableHints(clickedField);
 
@@ -38,32 +38,32 @@ export class ChessboardController {
     }
   }
 
-  #setSelectedField(clickedField) {
+  #setSelectedField(clickedField: Field) {
     this.#toggleSelectableFieldsForCurrentPlayer(false);
     this.#enableHints(clickedField);
   }
 
-  #changeSelectedField(clickedField) {
-    const moveFromField = this.selectedField;
-    this.#disableHints(this.selectedField);
+  #changeSelectedField(clickedField: Field) {
+    const moveFromField = this.selectedField!;
+    this.#disableHints(moveFromField);
     this.#makeMove(moveFromField, clickedField);
   }
 
-  #disableHints(clickedField) {
+  #disableHints(clickedField: Field) {
     this.selectedField = null;
     this.#toggleHints(clickedField, false);
   }
 
-  #enableHints(clickedField) {
+  #enableHints(clickedField: Field) {
     this.selectedField = clickedField;
     this.#toggleHints(this.selectedField, true);
   }
 
   /**
-   * @param {Field} fromField
-   * @param {Field} toField
+   * @param fromField
+   * @param toField
    */
-  #makeMove(fromField, toField) {
+  #makeMove(fromField: Field, toField: Field) {
     const move = this.chessboardModel.tryMove(fromField, toField);
     if (move === null) return;
 
@@ -77,15 +77,15 @@ export class ChessboardController {
     if (this.#isThisEndMove(willThatChainMove)) this.chessboardView.toggleEndButton(true);
   }
 
-  #renderMove(move) {
+  #renderMove(move: Move) {
     this.#renderPiece(null, move.fromField.row, move.fromField.column);
     this.#renderPiece(move.toField.piece, move.toField.row, move.toField.column);
-    if (move.attackedPiece !== null) {
+    if (move.attackedField !== null) {
       this.#renderPiece(null, move.attackedField.row, move.attackedField.column);
     }
   }
 
-  #willThatChainMove(move) {
+  #willThatChainMove(move: Move) {
     if (!this.chessboardModel.rules.canAttackChainMove || move.attackedPiece === null) return false;
 
     const movesFromDestination = this.chessboardModel.getPossibleMoves(move.toField.row, move.toField.column);
@@ -94,7 +94,7 @@ export class ChessboardController {
     return false;
   }
 
-  #isThisEndMove(willThatChainMove) {
+  #isThisEndMove(willThatChainMove: boolean) {
     return !willThatChainMove || this.chessboardModel.rules.canInterruptChainMove;
   }
 
@@ -117,10 +117,10 @@ export class ChessboardController {
     }
   }
 
-  #renderUndoMove(lastMove) {
+  #renderUndoMove(lastMove: Move) {
     this.#renderPiece(null, lastMove.toField.row, lastMove.toField.column);
     this.#renderPiece(lastMove.pieceToMove, lastMove.fromField.row, lastMove.fromField.column);
-    if (lastMove.attackedPiece !== null) {
+    if (lastMove.attackedField !== null) {
       this.#renderPiece(lastMove.attackedPiece, lastMove.attackedField.row, lastMove.attackedField.column);
     }
   }
@@ -158,7 +158,7 @@ export class ChessboardController {
     this.#toggleSelectableFieldsForCurrentPlayer(true);
   }
 
-  #toggleSelectableFieldsForCurrentPlayer(enableSelectable) {
+  #toggleSelectableFieldsForCurrentPlayer(enableSelectable: boolean) {
     this.chessboardModel.forEachField((field) => {
       if (field.piece !== null && field.piece.color === this.chessboardModel.currentPlayerColor) {
         this.chessboardView.setSelectableField(field.row, field.column, enableSelectable);
@@ -170,7 +170,7 @@ export class ChessboardController {
   /**
    * Toggles visual hints for specified field based on possible moves from it
    */
-  #toggleHints(field, enableHints) {
+  #toggleHints(field: Field, enableHints: boolean) {
     this.chessboardView.setFieldType(field.row, field.column, enableHints ? FieldType.SELECTED : FieldType.NONE);
     const moves = this.chessboardModel.getPossibleMoves(field.row, field.column);
 
@@ -188,12 +188,11 @@ export class ChessboardController {
 
   /**
    * @see {@link ChessboardModel.setBoard}
-   * @param {string} FAN
    */
-  setChessboard(FAN) {
+  setChessboard(FAN: string) {
     if (this.selectedField !== null) this.#disableHints(this.selectedField);
     this.#toggleSelectableFieldsForCurrentPlayer(false);
-    this.chessboardView.setHistoryText(null);
+    this.chessboardView.setHistoryText("");
     this.chessboardView.toggleMoveButtons(false);
 
     this.chessboardModel.setBoard(FAN);
@@ -212,7 +211,7 @@ export class ChessboardController {
     this.chessboardView.setGameInfoText(this.#getGameInfoString());
   }
 
-  #renderPiece(piece, row, column) {
+  #renderPiece(piece: Piece | null, row: number, column: number) {
     if (piece === null) this.chessboardView.setEmptyField(row, column);
     else if (piece instanceof Pawn) {
       if (piece.color === PieceColor.BLACK) this.chessboardView.setBlackPawn(row, column);
@@ -241,10 +240,9 @@ export class ChessboardController {
   }
 
   /**
-   * @param {string} word
    * @returns true if the word was processed, false if error occurred
    */
-  #handleWord(word) {
+  #handleWord(word: string): boolean {
     // examples: a2-F4:d5 | H8:f1
     const canWordBeAMove = /[a-hA-H][1-8]([-:][a-hA-H][1-8]){1,}$/.test(word);
     if (!canWordBeAMove) {
@@ -267,7 +265,7 @@ export class ChessboardController {
     return true;
   }
 
-  #showErrorWord(word) {
+  #showErrorWord(word: string) {
     this.chessboardView.setGameInfoText(`Ошибка хода: ${word}`);
   }
 

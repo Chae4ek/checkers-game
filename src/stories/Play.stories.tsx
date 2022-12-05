@@ -1,5 +1,7 @@
+import { FC } from "react";
+
 import { Play } from "../routes/Play";
-import { styleVarsForRoot } from "./styleVarsForRoot";
+import { styleVarsForRoot } from "./helper";
 
 export default {
   title: "Checkers/Play",
@@ -17,7 +19,7 @@ export default {
   },
 };
 
-const TemplatePlay = (args) => (
+const TemplatePlay: FC = (args) => (
   <>
     {styleVarsForRoot(args)}
     <main>
@@ -26,4 +28,4 @@ const TemplatePlay = (args) => (
   </>
 );
 
-export const play = TemplatePlay.bind();
+export const play = TemplatePlay.bind({});
